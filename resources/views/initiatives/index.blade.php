@@ -127,16 +127,9 @@
                                                                 <button type="button" class="btn btn-primary shadow btn-xs sharp me-1 edit-initiatives" data-bs-toggle="modal" data-bs-target="#edit-initiatives">
                                                                     <i class="fas fa-pencil-alt"></i>
                                                                 </button>
-                                                                {{-- <a href="{{ route('initiatives.edit', $i->id) }}"
-                                                                    class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a> --}}
-                                                                {{-- <button type="button" class="btn btn-warning shadow btn-xs sharp me-1 details-initiatives" data-bs-toggle="modal" data-bs-target="#details-initiatives">
-                                                                    <i class="fas fa-eye"></i>
-                                                                </button> --}}
                                                                 <button type="button" class="btn btn-warning shadow btn-xs sharp me-1 details-initiatives" data-bs-toggle="modal" data-bs-target="#details-initiatives">
                                                                     <i class="fas fa-eye"></i>
                                                                 </button>
-                                                                {{-- <a href="{{ route('assignment.detail', $i->id) }}"
-                                                                    data-bs-toggle="modal" data-bs-target="#details-initiatives" class="btn btn-warning shadow btn-xs sharp me-1"><i class="fas fa-eye"></i></a> --}}
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button>
