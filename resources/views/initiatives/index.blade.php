@@ -24,7 +24,6 @@
 </head>
 
 <body>
-
     {{-- Preloader start --}}
     <div id="preloader">
 		<div class="lds-ripple">
