@@ -332,7 +332,7 @@
                                     </div>
                                     <div class="modal-body">
                                         {{-- FORM --}}
-                                        <form id="e_form" action="" method="POST">
+                                        <form id="e_form" action="{{ route('initiatives.update', $i->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="form-group">
@@ -765,7 +765,6 @@
         <script>
             $(document).on('click','.edit-initiatives',function()
             {
-                alert('update dipencet gan');
                 var _this = $(this).parents('tr');
                 $('#e_id').val(_this.find('.e_id').text());
                 var e_form = (_this.find(".e_id").text());

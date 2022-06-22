@@ -4,7 +4,7 @@
     <div class="nav-header">
         <a href="{{ url('/') }}" class="brand-logo">
             <div class="logo-image-small">
-                <img class="logo-abbr" src="../images/logo_alimo.png" width="65" height="45" viewbox="55 55 55 55" fill="none">
+                <img class="logo-abbr" src="https://i.ibb.co/tMVHQGM/logo-alimo.png" width="65" height="45" viewbox="55 55 55 55" fill="none">
             </div>
             <svg class="logo-abbr" width="55" height="55" viewbox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -48,7 +48,7 @@
                     <li class="nav-item dropdown  header-profile">
                         <h4 style="margin-right: 10px; margin-top: 10px">{{ Auth::user()->name }}</h4>
                         <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-                            <img src="images/default-avatar.png" width="56" alt="">
+                            <img src="https://i.ibb.co/6Rzjtpx/default-avatar.png" width="56" alt="">
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a href="{{ url('/profile') }}" class="dropdown-item ai-icon">

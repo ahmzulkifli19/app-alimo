@@ -56,7 +56,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">List Project Initiatives</h4>
+                                    <h4 class="card-title">List Project Assignment</h4>
                                     {{-- <a href="{{ route('initiatives.create') }}" class="btn btn-md btn-primary float-right">+ Add Project Initiatives</a> --}}
                                 </div>
 
@@ -66,11 +66,16 @@
                                         <table id="example3" class="display">
                                             <thead>
                                                 <tr>
-                                                    <th style="min-width: 10px;"></th>
+                                                    <th style="min-width: 10px;">#</th>
                                                     <th style="min-width: 100px;">Project Code</th>
                                                     <th style="min-width: 200px;">Name Project</th>
                                                     <th style="min-width: 150px;">Project Category</th>
+                                                    <th style="min-width: 50px;">Year</th>
+                                                    <th hidden style="min-width: 70px;">Priority</th>
                                                     <th style="min-width: 110px;">Status</th>
+                                                    <th hidden style="min-width: 250px;">Client</th>
+                                                    <th hidden style="min-width: 150px;">Email</th>
+                                                    <th hidden style="min-width: 250px;">Description</th>
                                                     <th style="min-width: 70px;">Assignment</th>
                                                     <th style="min-width: 100px;">Action</th>
                                                 </tr>
@@ -79,9 +84,13 @@
                                                 @foreach ($assignment as $key=>$i )
                                                     <tr>
                                                         <td>{{ ++$key }}</td>
+                                                        <td hidden class="e_id">{{ $i->id }}</td>
+                                                        <td hidden class="id">{{ $i->id }}</td>
                                                         <td class="project_code">{{ $i->project_code }}</td>
                                                         <td class="name_project">{{ $i->name_project }}</td>
                                                         <td class="project_category">{{ $i->project_category }}</td>
+                                                        <td class="year">{{ $i->year }}</td>
+                                                        <td hidden class="priority">{{ $i->priority }}</td>
                                                         <td>
                                                             @if ($i->status == 'Pending')
                                                                 <span>
@@ -105,6 +114,10 @@
                                                                 </span>
                                                             @endif
                                                         </td>
+                                                        <td hidden class="status">{{ $i->status }}</td>
+                                                        <td hidden class="client">{{ $i->client }}</td>
+                                                        <td hidden class="email">{{ $i->email }}</td>
+                                                        <td hidden class="description">{{ $i->description }}</td>
                                                         <td>
                                                             @if ($i->assignment == 'Accept')
                                                                 <span class="badge badge-pill badge-success">
@@ -118,6 +131,7 @@
                                                                 </span>
                                                             @endif
                                                         </td>
+                                                        <td hidden class="assignment">{{ $i->assignment }}</td>
                                                         <td>
                                                             <form onsubmit="return confirm('Are you sure ?');"
                                                                 action="{{ route('assignment.destroy', $i->id) }}" method="POST">
@@ -126,8 +140,9 @@
                                                                 </button> --}}
                                                                 <a href="{{ route('assignment.edit', $i->id) }}"
                                                                     class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                                <a href="{{ route('assignment.detail', $i->id) }}"
-                                                                    data-bs-toggle="modal" data-bs-target="#details-initiatives" class="btn btn-warning shadow btn-xs sharp me-1"><i class="fas fa-eye"></i></a>
+                                                                <button type="button" class="btn btn-warning shadow btn-xs sharp me-1 details-assignment" data-bs-toggle="modal" data-bs-target="#details-assignment">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </button>
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button>
@@ -321,58 +336,180 @@
                             </div>
                         </div>
 
-                        {{-- View Project Initiatives --}}
-                        <div id="details-initiatives" class="modal custonm-modal fade" role="dialog">
+                         {{-- Details Data --}}
+                         <div id="details-assignment" class="modal custonm-modal fade" role="dialog">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">DETAILS PROJECT INITIATIVES</h5>
+                                        <h5 class="modal-title">DETAILS PROJECT ASSIGNMENT</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="e_form" action="" method="POST">
-                                        {{-- <form action="{{ route('assignment.detail', $i->id) }}" method="GET"> --}}
+                                        {{-- FORM --}}
+                                        <form id="d_form" action="" method="POST">
                                             @csrf
-                                            {{-- DATA PROJECT INITIATIVES --}}
-                                            <div class="col-12">
+                                            @method('PUT')
+                                            <div class="form-group">
                                                 <h5>Project Code</h5>
-                                                {{-- <p id="e_project_code" name="project_code" value="{{ old('project_code') }}" required></p> --}}
-                                                <p>{{ $i->project_code }}</p>
-                                                <hr>
+                                                <input type="text" class="form-control @error('project_code') is-invalid @enderror"
+                                                id="d_project_code" name="project_code" value="{{ old('project_code') }}" placeholder="ACT.(Singkatan Kategori Project).(Nomor urut Project)"disabled>
+                                                <!-- error message untuk title -->
+                                                @error('project_code')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div><hr>
+
+                                            <div class="form-group mt-3">
                                                 <h5>Name Project</h5>
-                                                <p>{{ $i->name_project }}</p>
-                                                {{-- <p id="e_name_project" name="name_project" value="{{ old('name_project') }}" required></p> --}}
-                                                <hr>
+                                                <input type="text" class="form-control @error('name_project') is-invalid @enderror"
+                                                id="d_name_project" name="name_project" value="{{ old('name_project') }}" placeholder="Nama Project" disabled>
+                                                <!-- error message untuk title -->
+                                                @error('name_project')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div><hr>
+
+                                            <div class="form-group mt-3">
                                                 <h5>Project Category</h5>
-                                                <p>{{ $i->project_category }}</p>
-                                                <hr>
+                                                <select class="select form-control @error('project_category') is-invalid @enderror"
+                                                id="d_project_category" name="project_category" value="{{ old('project_category') }}" disabled>
+                                                    <option selected disabled>-- Selected --</option>
+                                                    <option value="Web Development">WEB - Web Development</option>
+                                                    <option value="Web Designer">WDG - Web Designer</option>
+                                                    <option value="IT Helpdesk">ITH - IT Helpdesk</option>
+                                                    <option value="Network Service">NSC - Network Service</option>
+                                                    <option value="Manage Campaign">MGC - Manage Campaign</option>
+                                                    <option value="Content Social Media">CSM - Content Social Media</option>
+                                                    <option value="Graphic Designer">GDG - Graphic Designer</option>
+                                                    <option value="Video Designer">VDG - Video Designer</option>
+                                                    <option value="Motion Graphic">MTG - Motion Graphic</option>
+                                                    <option value="Bussiness Analythic">BSA- Bussiness Analythic</option>
+                                                </select>
+                                                <!-- error message untuk title -->
+                                                @error('project_category')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div><hr>
+
+                                            <div class="form-group mt-3">
                                                 <h5>Year</h5>
-                                                <p>{{ $i->year }}</p>
-                                                <hr>
+                                                <select class="select form-control @error('year') is-invalid @enderror"
+                                                id="d_year" name="year" value="{{ old('year') }}" disabled>
+                                                    <option selected disabled>-- Selected --</option>
+                                                    <option value="2022">2022</option>
+                                                    <option value="2023">2023</option>
+                                                    <option value="2024">2024</option>
+                                                    <option value="2025">2025</option>
+                                                    <option value="2026">2026</option>
+                                                    <option value="2027">2027</option>
+                                                </select>
+                                                <!-- error message untuk title -->
+                                                @error('year')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div><hr>
+
+                                            <div class="form-group mt-3">
                                                 <h5>Priority</h5>
-                                                <p>{{ $i->priority }}</p>
-                                                <hr>
+                                                <select class="select form-control @error('priority') is-invalid @enderror"
+                                                id="d_priority" name="priority" value="{{ old('priority') }}" disabled>
+                                                    <option selected disabled>-- Selected --</option>
+                                                    <option value="High">High</option>
+                                                    <option value="Medium">Medium</option>
+                                                    <option value="Low">Low</option>
+                                                </select>
+                                                <!-- error message untuk title -->
+                                                @error('priority')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div><hr>
+
+                                            <div class="form-group mt-3">
                                                 <h5>Status</h5>
-                                                <p>{{ $i->status }}</p>
-                                                <hr>
+                                                <select class="select form-control @error('status') is-invalid @enderror"
+                                                id="d_status" name="status" value="{{ old('status') }}" disabled>
+                                                    <option selected disabled>-- Selected --</option>
+                                                    <option value="Pending">Pending</option>
+                                                    <option value="On Progress">On Progress</option>
+                                                    <option value="Successful">Successful</option>
+                                                    <option value="Canceled">Canceled</option>
+                                                </select>
+                                                <!-- error message untuk title -->
+                                                @error('status')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div><hr>
+
+                                            <div class="form-group mt-3">
                                                 <h5>Client</h5>
-                                                <p>{{ $i->client }}</p>
-                                                <hr>
-                                                <h5>email</h5>
-                                                <p>{{ $i->email }}</p>
-                                                <hr>
+                                                <input type="text" class="form-control @error('client') is-invalid @enderror"
+                                                id="d_client" name="client" value="{{ old('client') }}" placeholder="Nama Client" disabled>
+                                                <!-- error message untuk title -->
+                                                @error('client')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div><hr>
+
+                                            <div class="form-group mt-3">
+                                                <h5>Email</h5>
+                                                <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                                id="d_email" name="email" value="{{ old('email') }}" placeholder="Email Client" disabled>
+                                                <!-- error message untuk title -->
+                                                @error('email')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div><hr>
+
+                                            <div class="form-group mt-3">
                                                 <h5>Description</h5>
-                                                <p>{{ $i->description }}</p>
-                                                <hr>
+                                                <input type="text" class="form-control @error('description') is-invalid @enderror"
+                                                    id="d_description" name="description" value="{{ old('description') }}" placeholder="Keterangan Project" disabled>
+                                                <!-- error message untuk title -->
+                                                @error('description')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div><hr>
+
+                                            <div class="form-group mt-3">
                                                 <h5>Assignment</h5>
-                                                <p>{{ $i->assignment }}</p>
+                                                <select class="select form-control @error('assignment') is-invalid @enderror"
+                                                id="d_assignment" name="assignment" value="{{ old('assignment') }}" disabled>
+                                                    <option>--- Selected ---</option>
+                                                    <option value="Accept">Accept</option>
+                                                    <option value="Dismiss">Dismiss</option>
+                                                </select>
+                                                <!-- error message untuk title -->
+                                                @error('assignment')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
+
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                            </div></div>
                     </div>
                 </div>
             </div>
@@ -458,39 +595,41 @@
         </script>
     {{------- End Scripts ------}}
 
-    {{-- update js --}}
+    {{-- details view --}}
     <script>
-        $(document).on('click','.details-initiatives',function()
+        $(document).on('click','.details-assignment',function()
         {
+            // alert('test');
             var _this = $(this).parents('tr');
-            $('#e_id').val(_this.find('.e_id').text());
-            var e_form = (_this.find(".e_id").text());
-            $('#e_form').attr('action', 'initiative/'+e_form);
-            $('#e_project_code').val(_this.find('.project_code').text());
-            $('#e_name_project').val(_this.find('.name_project').text());
-            $('#e_client').val(_this.find('.client').text());
-            $('#e_email').val(_this.find('.email').text());
-            $('#e_description').val(_this.find('.description').text());
+            $('#d_id').val(_this.find('.d_id').text());
+            var d_form = (_this.find(".d_id").text());
+            $('#d_form').attr('action', 'initiative/'+d_form);
+            $('#d_project_code').val(_this.find('.project_code').text());
+            $('#d_name_project').val(_this.find('.name_project').text());
+            $('#d_client').val(_this.find('.client').text());
+            $('#d_email').val(_this.find('.email').text());
+            $('#d_description').val(_this.find('.description').text());
 
             var project_category = (_this.find(".project_category").text());
             var _option = '<option selected value="' +project_category+ '">' + _this.find('.project_category').text() + '</option>'
-            $( _option).appendTo("#e_project_category");
+            $( _option).appendTo("#d_project_category");
 
             var year = (_this.find(".year").text());
             var _option = '<option selected value="' +year+ '">' + _this.find('.year').text() + '</option>'
-            $( _option).appendTo("#e_year");
+            $( _option).appendTo("#d_year");
 
             var priority = (_this.find(".priority").text());
             var _option = '<option selected value="' +priority+ '">' + _this.find('.priority').text() + '</option>'
-            $( _option).appendTo("#e_priority");
+            $( _option).appendTo("#d_priority");
 
             var status = (_this.find(".status").text());
             var _option = '<option selected value="' +status+ '">' + _this.find('.status').text() + '</option>'
-            $( _option).appendTo("#e_status");
+            $( _option).appendTo("#d_status");
 
             var assignment = (_this.find(".assignment").text());
             var _option = '<option selected value="' +assignment+ '">' + _this.find('.assignment').text() + '</option>'
-            $( _option).appendTo("#e_assignment");
+            $( _option).appendTo("#d_assignment");
+
         });
     </script>
 
