@@ -155,7 +155,7 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label class="col-form-group" for="status">Status <span class="text-danger"> Edit here! *</span></label>
                                                     <select class="select form-control @error('status') is-invalid @enderror"
-                                                    id="d_status" name="status" value="{{ old('status') }}" readonly>
+                                                    id="d_status" name="status" value="{{ old('status') }}" required>
                                                         <option selected disabled>-- Selected --</option>
                                                         <option value="Pending">Pending</option>
                                                         <option value="On Progress">On Progress</option>

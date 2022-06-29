@@ -106,37 +106,6 @@ class InitiativesController extends Controller
         return view('initiatives.edit', compact('initiatives'));
     }
 
-    // update record
-    // public function updateInitiatives(Request $request)
-    // {
-    //     DB::beginTransaction();
-    //     try {
-
-    //         $update = [
-    //             'id'               => $request->id,
-    //             'project_code'     => $request->project_code,
-    //             'name_project'     => $request->name_project,
-    //             'project_category' => $request->project_category,
-    //             'year'             => $request->year,
-    //             'priority'         => $request->priority,
-    //             'status'           => $request->status,
-    //             'client'           => $request->client,
-    //             'email'            => $request->email,
-    //             'description'      => $request->description,
-    //             'assignment'       => $request->assignment,
-    //         ];
-
-    //         Initiatives::where('id',$request->id)->update($update);
-    //         DB::commit();
-    //         // Toastr::success('Updated Initiatives successfully :)','Success');
-    //         return printer('tes');
-    //     } catch(\Exception $e) {
-    //         DB::rollback();
-    //         // Toastr::error('Update Initiatives fail :)','Error');
-    //         return redirect()->back();
-    //     }
-    // }
-
     /**
      * Update the specified resource in storage.
      *
@@ -156,9 +125,8 @@ class InitiativesController extends Controller
             'client' => 'required',
             'email' => 'required',
             'description' => 'required',
-            'assignment' => 'required',
+            // 'assignment' => 'required',
         ]);
-
 
         $initiatives = Initiatives::findOrFail($id);
 
@@ -172,7 +140,7 @@ class InitiativesController extends Controller
             'client' => $request->client,
             'email' => $request->email,
             'description' => $request->description,
-            'assignment' => $request->assignment,
+            // 'assignment' => $request->assignment,
         ]);
 
         if ($initiatives) {

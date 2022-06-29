@@ -5,6 +5,7 @@ use App\Http\Controllers\InitiativesController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\PlanningController;
 use App\Http\Controllers\ExecutionController;
+use App\Http\Controllers\TimelineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,10 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
 
 // ----------------------------------------- Projects Planning ----------------------------------------- //
 Route::resource('project-planning', PlanningController::class);
+Route::resource('planning', PlanningController::class);
+
+// ----------------------------------------- Projects Planning ----------------------------------------- //
+Route::resource('project-timeline', TimelineController::class);
 
 // ----------------------------------------- Projects Execution ----------------------------------------- //
 Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified' ])->group(function () {

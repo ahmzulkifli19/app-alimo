@@ -1,11 +1,11 @@
 "use strict"
 
 function fullCalender(){
-	
+
 	/* initialize the external events
 		-----------------------------------------------------------------*/
 
-		
+
 	/* initialize the calendar
 	-----------------------------------------------------------------*/
 
@@ -16,7 +16,7 @@ function fullCalender(){
 		right: 'today',
 		center: 'dayGridMonth,timeGridWeek,timeGridDay'
 	  },
-	  
+
 	  selectable: true,
 	  selectMirror: true,
 	  select: function(arg) {
@@ -31,7 +31,7 @@ function fullCalender(){
 		}
 		calendar.unselect()
 	  },
-	  
+
 	  editable: true,
 	  droppable: true, // this allows things to be dropped onto the calendar
 	  drop: function(arg) {
@@ -41,7 +41,7 @@ function fullCalender(){
 		  arg.draggedEl.parentNode.removeChild(arg.draggedEl);
 		}
 	  },
-	  
+
 		initialDate: '2021-02-13',
 		weekNumbers: true,
 		navLinks: true, // can click day/week names to navigate views
@@ -117,15 +117,15 @@ function fullCalender(){
 		  ]
 	});
 	calendar.render();
-}	
-	
+}
+
 jQuery(window).on('load',function(){
 	setTimeout(function(){
-		fullCalender();	
+		fullCalender();
 	}, 1000);
-	
-	
-});	
-	
 
-		
+
+});
+
+
+

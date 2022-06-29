@@ -10,13 +10,13 @@ use App\Models\Initiatives;
 use App\Models\Planning;
 
 
-class PlanningController extends Controller
+class TimelineController extends Controller
 {
     public function index()
     {
         $planning = Planning::with('initiatives')->paginate(10);
         $initiatives = Initiatives::latest()->get();
-        return view('projects.project-planning', compact('planning','initiatives'));
+        return view('projects.project-timeline', compact('planning','initiatives'));
         // $plannings = DB::table('planning')
         //             ->join('initiatives', 'planning.id', '=', 'initiatives.id')
         //             ->select('planning.*', 'initiatives.project_code', 'initiatives.name_project',
@@ -25,11 +25,5 @@ class PlanningController extends Controller
         //             ->get();
         // $planning = DB::table('planning')->get();
         // return view('projects.project-planning',compact('plannings','planning'));
-    }
-
-    public function timeline(){
-        $planning = Planning::with('initiatives')->paginate(10);
-        $initiatives = Initiatives::latest()->get();
-        return view('projects.project-timeline', compact('planning','initiatives'));
     }
 }

@@ -24,7 +24,6 @@
 </head>
 
 <body>
-
     {{-- Preloader start --}}
     <div id="preloader">
 		<div class="lds-ripple">
@@ -70,7 +69,7 @@
                                                     <th style="min-width: 100px;">Project Code</th>
                                                     <th style="min-width: 200px;">Name Project</th>
                                                     <th style="min-width: 150px;">Project Category</th>
-                                                    <th style="min-width: 50px;">Year</th>
+                                                    <th hidden style="min-width: 50px;">Year</th>
                                                     <th hidden style="min-width: 70px;">Priority</th>
                                                     <th style="min-width: 110px;">Status</th>
                                                     <th hidden style="min-width: 250px;">Client</th>
@@ -89,7 +88,7 @@
                                                         <td class="project_code">{{ $i->project_code }}</td>
                                                         <td class="name_project">{{ $i->name_project }}</td>
                                                         <td class="project_category">{{ $i->project_category }}</td>
-                                                        <td class="year">{{ $i->year }}</td>
+                                                        <td hidden class="year">{{ $i->year }}</td>
                                                         <td hidden class="priority">{{ $i->priority }}</td>
                                                         <td>
                                                             @if ($i->status == 'Pending')

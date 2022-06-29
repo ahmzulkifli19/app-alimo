@@ -20,7 +20,7 @@ class CreatePlanningsTable extends Migration
             $table->string('pic');
             $table->date('start_date');
             $table->date('due_date');
-            $table->integer('progress');
+            $table->integer('progress')->nullable();
             $table->timestamps();
         });
     }
