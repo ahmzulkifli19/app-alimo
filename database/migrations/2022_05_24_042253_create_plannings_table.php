@@ -18,8 +18,8 @@ class CreatePlanningsTable extends Migration
             $table->integer('initiatives_id');
             $table->string('division');
             $table->string('pic');
-            $table->date('start_date');
-            $table->date('due_date');
+            $table->string('start_date');
+            $table->string('due_date');
             $table->integer('progress')->nullable();
             $table->timestamps();
         });

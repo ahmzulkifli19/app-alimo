@@ -51,89 +51,113 @@
                     </div>
                     <!-- row -->
 
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Hover Table</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table header-border table-hover verticle-middle">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Product</th>
-                                                <th scope="col">Popularity</th>
-                                                <th scope="col">Sales</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Air Conditioner</td>
-                                                <td>
-                                                    <div class="progress" style="background: rgba(127, 99, 244, .1)">
-                                                        <div class="progress-bar" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge badge-primary light">70%</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Textiles</td>
-                                                <td>
-                                                    <div class="progress" style="background: rgba(76, 175, 80, .1)">
-                                                        <div class="progress-bar bg-success" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge badge-success">70%</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <td>Milk Powder</td>
-                                                <td>
-                                                    <div class="progress" style="background: rgba(70, 74, 83, .1)">
-                                                        <div class="progress-bar bg-dark" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge badge-dark light">70%</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>4</th>
-                                                <td>Vehicles</td>
-                                                <td>
-                                                    <div class="progress" style="background: rgba(255, 87, 34, .1)">
-                                                        <div class="progress-bar bg-danger" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge badge-danger">70%</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>5</th>
-                                                <td>Boats</td>
-                                                <td>
-                                                    <div class="progress" style="background: rgba(255, 193, 7, .1)">
-                                                        <div class="progress-bar bg-warning" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge badge-warning">70%</span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Datatable Project Execution</h4>
+                                </div>
+
+                                {{-- Table Project Execution --}}
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="example4" class="display">
+                                            <thead>
+                                                <tr>
+                                                    <th style="min-width: 10px;;">#</th>
+                                                    <th style="min-width: 85px">Project Code</th>
+                                                    <th style="min-width: 150px;">Name Project</th>
+                                                    {{-- <th style="min-width: 150px;">Project Category</th> --}}
+                                                    {{-- <th style="min-width: 50px;">Year</th> --}}
+                                                    {{-- <th style="min-width: 200px;">Client</th> --}}
+                                                    {{-- <th style="min-width: 150px;">Division</th> --}}
+                                                    <th style="min-width: 100px;">PIC</th>
+                                                    {{-- <th style="min-width: 70px;">Status</th> --}}
+                                                    <th style="min-width: 80px;">Progress</th>
+                                                    <th style="min-width: 85px;">Start Date</th>
+                                                    <th style="min-width: 85px;">Due Date</th>
+                                                    {{-- <th style="width: 500px;">Assignment</th> --}}
+                                                    <th style="min-width: 70px;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($planning as $key=>$plan )
+                                                    <tr>
+                                                        <td>{{ ++$key }}</td>
+                                                        <td class="initiatives_id">{{ $plan->initiatives->project_code }}</td>
+                                                        <td class="initiatives_id">{{ $plan->initiatives->name_project }}</td>
+                                                        {{-- <td class="initiatives_id">{{ $plan->initiatives->project_category }}</td> --}}
+                                                        {{-- <td class="initiatives_id">{{ $plan->initiatives->year }}</td> --}}
+                                                        {{-- <td class="initiatives_id">{{ $plan->initiatives->client }}</td> --}}
+                                                        {{-- <td class="division">{{ $plan->division }}</td> --}}
+                                                        <td class="pic">{{ $plan->pic }}</td>
+                                                        {{-- <td>
+                                                            @if ($plan->initiatives->status == 'Pending')
+                                                                <span class="badge badge-pill badge-warning">
+                                                                    <i class="fa fa-stream me-1"></i>
+                                                                    {{ $plan->initiatives->status }}
+                                                                </span>
+                                                            @elseif ($plan->initiatives->status == 'On Progress')
+                                                                <span class="badge badge-pill badge-primary">
+                                                                    <i class="fa fa-redo me-1"></i>
+                                                                    {{ $plan->initiatives->status }}
+                                                                </span>
+                                                            @elseif ($plan->initiatives->status == 'Successfull')
+                                                                <span class="badge badge-pill badge-success">
+                                                                    <i class="fa fa-check me-1"></i>
+                                                                    {{ $plan->initiatives->status }}
+                                                                </span>
+                                                            @elseif ($plan->initiatives->status == 'Cancel')
+                                                                <span class="badge badge-pill badge-danger">
+                                                                    <i class="fa fa-ban me-1"></i>
+                                                                    {{ $plan->initiatives->status }}
+                                                                </span>
+                                                            @endif
+                                                        </td> --}}
+                                                        <td>
+                                                            {{-- <span>
+                                                                <progress id="progress" value="{{ $plan->progress }}" max="100">{{ $plan->progress }}</progress>
+                                                            </span> --}}
+                                                            <h6>
+                                                                <span class="pull-end">{{ $plan->progress }}%</span>
+                                                            </h6>
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-info progress-animated" style="width: {{ $plan->progress }}%;" role="progressbar">
+                                                                    <span class="sr-only">{{ $plan->progress }}% Complete</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="star_date">{{ $plan->start_date }}</td>
+                                                        <td class="due_date">{{ $plan->due_date }}</td>
+                                                        {{-- <td class="progress">{{ $plan->progress }}</td> --}}
+                                                        <td>
+                                                            <form onsubmit="return confirm('Are you sure ?');"
+                                                                action="#" method="POST">
+                                                                <a href="#"
+                                                                    class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                                <button type="button" class="btn btn-warning shadow btn-xs sharp me-1 details-planning" data-bs-toggle="modal" data-bs-target="#details-initiatives">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </button>
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        {{-- Tambah data --}}
+
+                        {{-- Edit data --}}
+
                     </div>
+
 
                 </div>
             </div>

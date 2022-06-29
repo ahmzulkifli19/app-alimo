@@ -87,7 +87,7 @@
 
                                 <div class="auth-form">
                                     <div class="text-center mb-3">
-                                        <a href="index.html"><img src="images/logo_pm_alimo.png" alt="" width="1000px" height="100px"></a>
+                                        <a href="/"><img src="images/logo_pm_alimo.png" alt="" width="1000px" height="100px"></a>
                                     </div>
                                     <h4 class="text-center mb-4">Log in your account</h4>
                                     <form method="POST" action="{{ route('login') }}">

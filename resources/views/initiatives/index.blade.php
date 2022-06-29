@@ -103,7 +103,7 @@
                                                                     <i class="fa fa-circle text-primary me-1"></i>
                                                                     {{ $i->status }}
                                                                 </span>
-                                                            @elseif ($i->status == 'Successful')
+                                                            @elseif ($i->status == 'Successfull')
                                                                 <span>
                                                                     <i class="fa fa-circle text-success me-1"></i>
                                                                     {{ $i->status }}
@@ -249,7 +249,7 @@
                                                     <option selected disabled>-- Selected --</option>
                                                     <option value="Pending">Pending</option>
                                                     <option value="On Progress">On Progress</option>
-                                                    <option value="Successful">Successful</option>
+                                                    <option value="Successfull">Successfull</option>
                                                     <option value="Canceled">Canceled</option>
                                                 </select>
                                                 <!-- error message untuk title -->
@@ -328,7 +328,7 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">EDIT PROJECT INITIATIVES</h5>
+                                        <h5 class="modal-title">ADD PROJECT INITIATIVES</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -428,7 +428,7 @@
                                                     <option selected disabled>-- Selected --</option>
                                                     <option value="Pending">Pending</option>
                                                     <option value="On Progress">On Progress</option>
-                                                    <option value="Successful">Successful</option>
+                                                    <option value="Successfull">Successfull</option>
                                                     <option value="Canceled">Canceled</option>
                                                 </select>
                                                 <!-- error message untuk title -->
@@ -608,7 +608,7 @@
                                                     <option selected disabled>-- Selected --</option>
                                                     <option value="Pending">Pending</option>
                                                     <option value="On Progress">On Progress</option>
-                                                    <option value="Successful">Successful</option>
+                                                    <option value="Successfull">Successfull</option>
                                                     <option value="Canceled">Canceled</option>
                                                 </select>
                                                 <!-- error message untuk title -->

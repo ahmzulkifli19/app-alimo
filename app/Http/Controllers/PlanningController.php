@@ -16,20 +16,101 @@ class PlanningController extends Controller
     {
         $planning = Planning::with('initiatives')->paginate(10);
         $initiatives = Initiatives::latest()->get();
-        return view('projects.project-planning', compact('planning','initiatives'));
-        // $plannings = DB::table('planning')
-        //             ->join('initiatives', 'planning.id', '=', 'initiatives.id')
-        //             ->select('planning.*', 'initiatives.project_code', 'initiatives.name_project',
-        //                     'initiatives.project_category', 'initiatives.year', 'initiatives.priority',
-        //                     'initiatives.status', 'initiatives.client')
-        //             ->get();
-        // $planning = DB::table('planning')->get();
-        // return view('projects.project-planning',compact('plannings','planning'));
+        $initiativess = Initiatives::all();
+        return view('planning.index', compact('planning','initiatives','initiativess'));
     }
 
-    public function timeline(){
-        $planning = Planning::with('initiatives')->paginate(10);
-        $initiatives = Initiatives::latest()->get();
-        return view('projects.project-timeline', compact('planning','initiatives'));
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'initiatives_id' => 'required',
+            'division' => 'required',
+            'pic' => 'required',
+            'start_date' => 'required',
+            'due_date' => 'required',
+            'progress' => 'required',
+        ]);
+
+        $planning = Planning::create([
+            'initiatives_id' => $request->initiatives_id,
+            'division' => $request->division,
+            'pic' => $request->pic,
+            'start_date' => $request->start_date,
+            'due_date' => $request->due_date,
+            'progress' => $request->progress,
+        ]);
+
+        if ($planning) {
+            return redirect()
+                ->route('planning.index')
+                ->with([
+                    'success' => 'Project Planning has been created successfully'
+                ]);
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with([
+                    'error' => 'Some problem occurred, please try again'
+                ]);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'initiatives_id' => 'required',
+            'division' => 'required',
+            'pic' => 'required',
+            'start_date' => 'required',
+            'due_date' => 'required',
+            'progress' => 'required',
+        ]);
+
+        $planning = Planning::findOrFail($id);
+
+        $planning->update([
+            'initiatives_id' => $request->initiatives_id,
+            'division' => $request->division,
+            'pic' => $request->pic,
+            'start_date' => $request->start_date,
+            'due_date' => $request->due_date,
+            'progress' => $request->progress,
+        ]);
+
+        if ($planning) {
+            return redirect()
+                ->route('planning.index')
+                ->with([
+                    'success' => 'Project Planning has been updated successfully'
+                ]);
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with([
+                    'error' => 'Some problem has occured, please try again'
+                ]);
+        }
+    }
+
+    public function destroy($id)
+    {
+        $planning = Planning::findOrFail($id);
+        $planning->delete();
+
+        if ($planning) {
+            return redirect()
+                ->route('planning.index')
+                ->with([
+                    'success' => 'Project Planning has been deleted successfully'
+                ]);
+        } else {
+            return redirect()
+                ->route('planning.index')
+                ->with([
+                    'error' => 'Some problem has occurred, please try again'
+                ]);
+        }
     }
 }

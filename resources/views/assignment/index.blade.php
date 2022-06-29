@@ -101,7 +101,7 @@
                                                                     <i class="fa fa-circle text-primary me-1"></i>
                                                                     {{ $i->status }}
                                                                 </span>
-                                                            @elseif ($i->status == 'Successful')
+                                                            @elseif ($i->status == 'Successfull')
                                                                 <span>
                                                                     <i class="fa fa-circle text-success me-1"></i>
                                                                     {{ $i->status }}
@@ -261,7 +261,7 @@
                                                     <option selected disabled>-- Selected --</option>
                                                     <option value="Pending">Pending</option>
                                                     <option value="On Progress">On Progress</option>
-                                                    <option value="Successful">Successful</option>
+                                                    <option value="Successfull">Successfull</option>
                                                     <option value="Canceled">Canceled</option>
                                                 </select>
                                                 <!-- error message untuk title -->
@@ -440,7 +440,7 @@
                                                     <option selected disabled>-- Selected --</option>
                                                     <option value="Pending">Pending</option>
                                                     <option value="On Progress">On Progress</option>
-                                                    <option value="Successful">Successful</option>
+                                                    <option value="Successfull">Successfull</option>
                                                     <option value="Canceled">Canceled</option>
                                                 </select>
                                                 <!-- error message untuk title -->

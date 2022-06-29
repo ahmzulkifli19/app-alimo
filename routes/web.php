@@ -50,10 +50,10 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
 });
 
 // ----------------------------------------- Projects Planning ----------------------------------------- //
-Route::resource('project-planning', PlanningController::class);
+// Route::resource('project-planning', PlanningController::class);
 Route::resource('planning', PlanningController::class);
 
-// ----------------------------------------- Projects Planning ----------------------------------------- //
+// ----------------------------------------- Timeline ----------------------------------------- //
 Route::resource('project-timeline', TimelineController::class);
 
 // ----------------------------------------- Projects Execution ----------------------------------------- //
@@ -80,5 +80,3 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
 Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified' ])->group(function () {
     Route::get('/setting', function () { return view('profile/setting'); })->name('setting');
 });
-
-// Route::resource('project', ProjectController::class);
