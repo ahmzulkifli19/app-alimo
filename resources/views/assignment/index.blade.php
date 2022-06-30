@@ -1,3 +1,10 @@
+@if(Auth::user()->role==1)
+@else`
+<script>
+    alert("You can't access this page.")
+    window.location.href = "{{ url('/') }}";
+</script>
+@endif
 <!DOCTYPE html>
 <html lang="en">
 <head>

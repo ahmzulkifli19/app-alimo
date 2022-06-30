@@ -17,22 +17,26 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ url('/all-projects') }}">All Project</a></li>
                         <li><a href="{{ url('/initiatives') }}">Project Initiatives</a></li>
-                        <li><a href="{{ url('/assignment') }}">Project Assignment</a></li>
-                        <li><a href="{{ url('/planning') }}">Project Planning</a></li>
+                        @if(Auth::user()->role==1)
+                            <li><a href="{{ url('/assignment') }}">Project Assignment</a></li>
+                            <li><a href="{{ url('/planning') }}">Project Planning</a></li>
+                        @endif
                         <li><a href="{{ url('/project-execution') }}">Project Execution</a></li>
                     </ul>
                 </li>
 
-                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                        <i class="fas fa-users"></i>
-                        <span class="nav-text">Users Manage</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="#">All User</a></li>
-                        <li><a href="#">Log Activity</a></li>
-                        {{-- <li><a href="#">Performance User</a></li> --}}
-                    </ul>
-                </li>
+                @if(Auth::user()->role==1)
+                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-text">Users Manage</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="#">All User</a></li>
+                            <li><a href="#">Log Activity</a></li>
+                            {{-- <li><a href="#">Performance User</a></li> --}}
+                        </ul>
+                    </li>
+                @endif
 
                 <li><a href="{{ url('/project-timeline') }}" class="" aria-expanded="false">
                     <i class="fas fa-calendar"></i>

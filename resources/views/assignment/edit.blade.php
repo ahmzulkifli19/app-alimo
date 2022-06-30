@@ -1,3 +1,10 @@
+@if(Auth::user()->role==1)
+@else`
+<script>
+    alert("You can't access this page.")
+    window.location.href = "{{ url('/') }}";
+</script>
+@endif
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +51,7 @@
                     <div class="row page-titles">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active"><a href="../../javascript:void(0)">Project Assignment</a></li>
-                            {{-- <li class="breadcrumb-item"><a href="../../javascript:void(0)">Edit Project Assignment</a></li> --}}
+                            <li class="breadcrumb-item"><a href="../../javascript:void(0)">Edit</a></li>
                         </ol>
                     </div>
                     <!-- row -->

@@ -17,7 +17,7 @@ class PlanningController extends Controller
         $planning = Planning::with('initiatives')->paginate(10);
         $initiatives = Initiatives::latest()->get();
         $initiativess = Initiatives::all();
-        return view('planning.index', compact('planning','initiatives','initiativess'));
+        return view('planning.index', compact('planning','initiatives', 'initiativess'));
     }
 
     public function store(Request $request)

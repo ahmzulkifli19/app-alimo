@@ -1,3 +1,10 @@
+@if(Auth::user()->role==1)
+@else`
+<script>
+    alert("You can't access this page.")
+    window.location.href = "{{ url('/') }}";
+</script>
+@endif
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,8 +167,8 @@
                                                     {{-- <th style="min-width: 200px;">Client</th> --}}
                                                     {{-- <th style="min-width: 150px;">Division</th> --}}
                                                     <th style="min-width: 100px;">PIC</th>
-                                                    <th style="min-width: 70px;">Status</th>
-                                                    {{-- <th style="min-width: 80px;">Progress</th> --}}
+                                                    {{-- <th style="min-width: 70px;">Status</th> --}}
+                                                    <th style="min-width: 80px;">Progress</th>
                                                     <th style="min-width: 85px;">Start Date</th>
                                                     <th style="min-width: 85px;">Due Date</th>
                                                     {{-- <th style="width: 500px;">Assignment</th> --}}
@@ -169,7 +176,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($planning as $key=>$plan )
+                                                @foreach ($planning as $key=> $plan )
                                                     <tr>
                                                         <td>{{ ++$key }}</td>
                                                         <td class="initiatives_id">{{ $plan->initiatives->project_code }}</td>
@@ -179,7 +186,7 @@
                                                         {{-- <td class="initiatives_id">{{ $plan->initiatives->client }}</td> --}}
                                                         {{-- <td class="division">{{ $plan->division }}</td> --}}
                                                         <td class="pic">{{ $plan->pic }}</td>
-                                                        <td>
+                                                        {{-- <td>
                                                             @if ($plan->initiatives->status == 'Pending')
                                                                 <span class="badge badge-pill badge-warning">
                                                                     <i class="fa fa-stream me-1"></i>
@@ -201,8 +208,8 @@
                                                                     {{ $plan->initiatives->status }}
                                                                 </span>
                                                             @endif
-                                                        </td>
-                                                        {{-- <td>
+                                                        </td> --}}
+                                                        <td>
                                                             <h6>
                                                                 <span class="pull-end">{{ $plan->progress }}%</span>
                                                             </h6>
@@ -211,14 +218,14 @@
                                                                     <span class="sr-only">{{ $plan->progress }}% Complete</span>
                                                                 </div>
                                                             </div>
-                                                        </td> --}}
+                                                        </td>
                                                         <td class="star_date">{{ $plan->start_date }}</td>
                                                         <td class="due_date">{{ $plan->due_date }}</td>
                                                         {{-- <td class="progress">{{ $plan->progress }}</td> --}}
                                                         <td>
                                                             <form onsubmit="return confirm('Are you sure ?');"
-                                                                action="#" method="POST">
-                                                                <a href="#"
+                                                                action="{{ route('planning.destroy', $plan->id) }}" method="POST">
+                                                                <a href="{{ route('planning.edit', $plan->id) }}"
                                                                     class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
                                                                 <button type="button" class="btn btn-warning shadow btn-xs sharp me-1 details-planning" data-bs-toggle="modal" data-bs-target="#details-initiatives">
                                                                     <i class="fas fa-eye"></i>
@@ -254,7 +261,7 @@
                                                 <select class="select form-control @error('initiatives_id') is-invalid @enderror"
                                                 name="initiatives_id" value="{{ old('initiatives_id') }}" required>
                                                     <option selected disabled>-- Selected --</option>
-                                                    @foreach ($initiativess as $i)
+                                                    @foreach ($initiatives as $i)
                                                         <option value="{{ $i->id }}">{{ $i->project_code }}</option>
                                                     @endforeach
                                                 </select>
