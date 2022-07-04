@@ -91,30 +91,30 @@ class AssignmentController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'project_code' => 'required',
-            'name_project' => 'required',
-            'project_category' => 'required',
-            'year' => 'required',
-            'priority' => 'required',
+            // 'project_code' => 'required',
+            // 'name_project' => 'required',
+            // 'project_category' => 'required',
+            // 'year' => 'required',
+            // 'priority' => 'required',
             'status' => 'required',
-            'client' => 'required',
-            'email' => 'required',
-            'description' => 'required',
+            // 'client' => 'required',
+            // 'email' => 'required',
+            // 'description' => 'required',
             'assignment' => 'required',
         ]);
 
         $assignment = Initiatives::findOrFail($id);
 
         $assignment->update([
-            'project_code' => $request->project_code,
-            'name_project' => $request->name_project,
-            'project_category' => $request->project_category,
-            'year' => $request->year,
-            'priority' => $request->priority,
+            // 'project_code' => $request->project_code,
+            // 'name_project' => $request->name_project,
+            // 'project_category' => $request->project_category,
+            // 'year' => $request->year,
+            // 'priority' => $request->priority,
             'status' => $request->status,
-            'client' => $request->client,
-            'email' => $request->email,
-            'description' => $request->description,
+            // 'client' => $request->client,
+            // 'email' => $request->email,
+            // 'description' => $request->description,
             'assignment' => $request->assignment,
         ]);
 

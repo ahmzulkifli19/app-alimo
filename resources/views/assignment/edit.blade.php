@@ -82,7 +82,7 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label for="project_code">Project Code <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control @error('project_code') is-invalid @enderror" name="project_code"
-                                                        value="{{ old('project_code', $assignment->project_code) }}" readonly>
+                                                        value="{{ old('project_code', $assignment->project_code) }}" disabled>
                                                     <!-- error message untuk title -->
                                                     @error('project_code')
                                                         <div class="invalid-feedback">
@@ -93,7 +93,7 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label for="name_project">Name Project <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control @error('name_project') is-invalid @enderror" name="name_project"
-                                                        value="{{ old('name_project', $assignment->name_project) }}" readonly>
+                                                        value="{{ old('name_project', $assignment->name_project) }}" disabled>
                                                     <!-- error message untuk title -->
                                                     @error('name_project')
                                                         <div class="invalid-feedback">
@@ -104,7 +104,7 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label class="col-form-group" for="project_category">Project Category <span class="text-danger">*</span></label>
                                                     <select class="select form-control @error('project_category') is-invalid @enderror"
-                                                    id="d_project_category" name="project_category" value="{{ old('project_category') }}" readonly>
+                                                    id="d_project_category" name="project_category" value="{{ old('project_category') }}" disabled>
                                                         <option selected disabled>-- Selected --</option>
                                                         <option value="Web Development">WEB - Web Development</option>
                                                         <option value="Web Designer">WDG - Web Designer</option>
@@ -127,7 +127,7 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label class="col-form-group" for="year">Year <span class="text-danger">*</span></label>
                                                     <select class="select form-control @error('year') is-invalid @enderror"
-                                                    id="d_year" name="year" value="{{ old('year', $assignment->year) }}" readonly>
+                                                    id="d_year" name="year" value="{{ old('year', $assignment->year) }}" disabled>
                                                         <option>--- Selected ---</option>
                                                         <option value="2022">2022</option>
                                                         <option value="2023">2023</option>
@@ -146,7 +146,7 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label class="col-form-group" for="priority">Priority <span class="text-danger">*</span></label>
                                                     <select class="select form-control @error('priority') is-invalid @enderror"
-                                                    id="d_priority" name="priority" value="{{ old('priority', $assignment->priority) }}" readonly>
+                                                    id="d_priority" name="priority" value="{{ old('priority', $assignment->priority) }}" disabled>
                                                         <option>--- Selected ---</option>
                                                         <option value="High">High</option>
                                                         <option value="Medium">Medium</option>
@@ -179,7 +179,7 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label for="client">Client <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control @error('client') is-invalid @enderror"
-                                                        name="client" value="{{ old('client', $assignment->client) }}" readonly>
+                                                        name="client" value="{{ old('client', $assignment->client) }}" disabled>
                                                     <!-- error message untuk title -->
                                                     @error('client')
                                                         <div class="invalid-feedback">
@@ -190,7 +190,7 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label for="email">Email <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control @error('email') is-invalid @enderror"
-                                                        name="email" value="{{ old('email', $assignment->email) }}" readonly>
+                                                        name="email" value="{{ old('email', $assignment->email) }}" disabled>
                                                     <!-- error message untuk title -->
                                                     @error('email')
                                                         <div class="invalid-feedback">
@@ -201,7 +201,7 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label for="description">Description <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control @error('description') is-invalid @enderror"
-                                                        name="description" value="{{ old('description', $assignment->description) }}" readonly>
+                                                        name="description" value="{{ old('description', $assignment->description) }}" disabled>
                                                     <!-- error message untuk title -->
                                                     @error('description')
                                                         <div class="invalid-feedback">

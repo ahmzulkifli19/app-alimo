@@ -56,10 +56,17 @@ class PlanningController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $planning = Planning::findOrFail($id);
+        $initiatives = Planning::with('initiatives')->paginate(10);
+        return view('planning.edit', compact('planning','initiatives'));
+    }
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'initiatives_id' => 'required',
+            // 'initiatives_id' => 'required',
             'division' => 'required',
             'pic' => 'required',
             'start_date' => 'required',
@@ -70,7 +77,7 @@ class PlanningController extends Controller
         $planning = Planning::findOrFail($id);
 
         $planning->update([
-            'initiatives_id' => $request->initiatives_id,
+            // 'initiatives_id' => $request->initiatives_id,
             'division' => $request->division,
             'pic' => $request->pic,
             'start_date' => $request->start_date,
