@@ -19,13 +19,23 @@
 	<!-- PAGE TITLE HERE -->
 	<title>Edit Project Planning | PM Alimo C&T </title>
 
-	<!-- FAVICONS ICON -->
+    <!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="../../images/logo_alimo.png">
-	<link href="../../vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-	<link href="../../vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
-	<link rel="stylesheet" href="../../vendor/nouislider/nouislider.min.css">
+    <!-- Daterange picker -->
+    <link href="../../vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Clockpicker -->
+    <link href="../../vendor/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+    <!-- asColorpicker -->
+    <link href="../../vendor/jquery-asColorPicker/css/asColorPicker.min.css" rel="stylesheet">
+    <!-- Material color picker -->
+    <link href="../../vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
 
-	<!-- Style css -->
+    <!-- Pick date -->
+    <link rel="stylesheet" href="../../vendor/pickadate/themes/default.css">
+    <link rel="stylesheet" href="../../vendor/pickadate/themes/default.date.css">
+	<link href="../../icon.css?family=Material+Icons" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+	<link href="../../vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="../../css/style.css" rel="stylesheet">
 
 </head>
@@ -79,27 +89,26 @@
                                             @csrf
                                             @method('PUT')
                                             <div class="row">
-                                                <div class="form-group mt-3">
-                                                    <label class="col-form-group" for="initiatives_id">Project Code <span class="text-danger">*</span></label>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="initiatives_id">Project Code <span class="text-danger">*</span></label>
                                                     <select class="select form-control @error('initiatives_id') is-invalid @enderror"
-                                                    name="initiatives_id" value="{{ old('initiatives_id') }}" disabled>
+                                                    id="d_initiatives_id" name="initiatives_id" value="{{ old('initiatives_id') }}" disabled>
                                                         <option selected disabled>-- Selected --</option>
                                                         @foreach ($initiatives as $i)
-                                                            <option value="{{ $i->initiatives->id }}">{{ $i->initiatives->project_code }}</option>
+                                                            <option value="{{ $i->project_code }}">{{ $i->project_code }}</option>
                                                         @endforeach
                                                     </select>
-                                                    <!-- error message untuk title -->
                                                     @error('initiatives_id')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
-                                                <div class="form-group mt-3">
-                                                    <label class="col-form-group" for="division">Division <span class="text-danger">*</span></label>
+                                                <div class="mb-3 col-md-6">
+                                                    <label class="col-form-group" for="division">Division <span class="text-danger"> Edit here! *</span></label>
                                                     <select class="select form-control @error('division') is-invalid @enderror"
-                                                    name="division" value="{{ old('division') }}" required>
+                                                    id="d_division" name="division" value="{{ old('division', $planning->division) }}" required>
                                                         <option selected disabled>-- Selected --</option>
                                                         <option value="Web Developer">Web Developer</option>
                                                         <option value="UI/UX Developer">UI/UX Developer</option>
@@ -109,16 +118,16 @@
                                                         <option value="Graphic Designer">Graphic Designer</option>
                                                         <option value="Video Designer">Video Designer</option>
                                                         <option value="Bussiness Analythic">Bussiness Analythic</option>
-                                                    </select>
+                                                        </select>
                                                     <!-- error message untuk title -->
                                                     @error('division')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
-                                                <div class="form-group mt-3">
+                                                <div class="mb-3 col-md-6">
                                                     <label for="pic">PIC <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control @error('pic') is-invalid @enderror"
                                                         name="pic" value="{{ old('pic') }}" placeholder="PIC Project"required>
@@ -130,7 +139,7 @@
                                                     @enderror
                                                 </div>
 
-                                                <div class="form-group mt-3">
+                                                <div class="mb-3 col-md-6">
                                                     <label for="start_date">Start Date <span class="text-danger">*</span></label>
                                                     <input type="text" class="datepicker-default form-control @error('start_date') is-invalid @enderror"
                                                         name="start_date" value="{{ old('start_date') }}" placeholder="Start Date Project"required>
@@ -141,33 +150,33 @@
                                                     </div>
                                                     @enderror
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group mt-3">
-                                                <label for="due_date">Due Date <span class="text-danger">*</span></label>
-                                                <input type="text" class="datepicker-default form-control @error('due_date') is-invalid @enderror"
-                                                    name="due_date" value="{{ old('due_date') }}" placeholder="Due Date Project"required>
-                                                <!-- error message untuk title -->
-                                                @error('due_date')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="due_date">Due Date <span class="text-danger">*</span></label>
+                                                    <input type="text" class="datepicker-default form-control @error('due_date') is-invalid @enderror"
+                                                        name="due_date" value="{{ old('due_date') }}" placeholder="Due Date Project"required>
+                                                    <!-- error message untuk title -->
+                                                    @error('due_date')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
                                                 </div>
-                                                @enderror
-                                            </div>
 
-                                            <div class="form-group mt-3">
-                                                <label for="progress">Progress <span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control @error('progress') is-invalid @enderror"
-                                                    name="progress" value="{{ old('progress') }}" placeholder="Progress Project"required>
-                                                <!-- error message untuk title -->
-                                                @error('progress')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="progress">Progress <span class="text-danger">*</span></label>
+                                                    <input type="number" class="form-control @error('progress') is-invalid @enderror"
+                                                        name="progress" value="{{ old('progress') }}" placeholder="Progress Project"required>
+                                                    <!-- error message untuk title -->
+                                                    @error('progress')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
                                                 </div>
-                                                @enderror
-                                            </div>
 
-                                            <div class="float-right mt-3">
+                                            </div>
+                                            <div class="float-right">
                                                 <button type="submit" class="btn btn-primary">Update</button>
                                                 <a href="{{ route('planning.index') }}" class="btn btn-secondary">Back</a>
                                             </div>
@@ -189,7 +198,7 @@
 
     {{------- Start Scripts ------}}
         <!-- FAVICONS ICON -->
-        <link rel="shortcut icon" type="image/png" href="../../../images/favicon.png">
+        <link rel="shortcut icon" type="image/png" href="../../images/favicon.png">
         <!-- Datatable -->
         <link href="../../vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
         <!-- Custom Stylesheet -->
@@ -212,6 +221,12 @@
         <script src="../../js/dlabnav-init.js"></script>
         <script src="../../js/demo.js"></script>
         <script src="../../js/styleSwitcher.js"></script>
+        <!-- pickdate -->
+        <script src="../../vendor/pickadate/picker.js"></script>
+        <script src="../../vendor/pickadate/picker.time.js"></script>
+        <script src="../../vendor/pickadate/picker.date.js"></script>
+        <!-- Pickdate -->
+        <script src="../../js/plugins-init/pickadate-init.js"></script>
 
         <!-- Dashboard 1 -->
         <script src="../../js/dashboard/dashboard-1.js"></script>
@@ -219,7 +234,7 @@
         <script src="../../js/custom.min.js"></script>
         <script src="../../js/dlabnav-init.js"></script>
         <script src="../../js/demo.js"></script>
-        <script src="../../js/styleSwitcher.js"></script>
+        <script src="../../js/styleSwitcher.js"></script>../../
         <script>
             function cardsCenter()
             {
@@ -263,26 +278,17 @@
         </script>
     {{------- End Scripts ------}}
 
+    {{-- details view --}}
     <script>
-        var initiatives_id = '{{ old('initiatives_id', $planning->initiatives_id) }}';
+
+
+        var initiatives_id = '{{ old('initiatives_id', $planning->initiatives->project_code) }}';
         var _option = '<option selected value="' +initiatives_id+ '">' + initiatives_id + '</option>'
         $( _option).appendTo("#d_initiatives_id");
 
-        var year = '{{ old('year', $planning->year) }}';
-        var _option = '<option selected value="' +year+ '">' + year + '</option>'
-        $( _option).appendTo("#d_year");
-
-        var priority = '{{ old('priority', $planning->priority) }}';
-        var _option = '<option selected value="' +priority+ '">' + priority + '</option>'
-        $( _option).appendTo("#d_priority");
-
-        var status = '{{ old('status', $planning->status) }}';
-        var _option = '<option selected value="' +status+ '">' + status + '</option>'
-        $( _option).appendTo("#d_status");
-
-        var planning = '{{ old('planning', $planning->planning) }}';
-        var _option = '<option selected value="' +planning+ '">' + planning + '</option>'
-        $( _option).appendTo("#d_planning");
+        var division = '{{ old('division', $planning->division) }}';
+        var _option = '<option selected value="' +division+ '">' + division + '</option>'
+        $( _option).appendTo("#d_division");
     </script>
 
 </body>

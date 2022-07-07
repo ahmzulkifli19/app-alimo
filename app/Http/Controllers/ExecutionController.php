@@ -20,14 +20,15 @@ class ExecutionController extends Controller
         $planning = Planning::latest()->get();
         $initiativess = Initiatives::all();
         $plannings = Planning::all();
-        return view('execution.index', compact('planning','initiatives', 'initiativess'));
+        return view('execution.index', compact('execution','initiatives', 'palnning', 'initiativess', 'plannings'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'initiatives_id' => 'required',
-            'division' => 'required',
+            'planning_id' => 'required',
+            'status' => 'required',
             'pic' => 'required',
             'start_date' => 'required',
             'due_date' => 'required',

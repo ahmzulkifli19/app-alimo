@@ -15,7 +15,7 @@ class CreatePlanningsTable extends Migration
     {
         Schema::create('planning', function (Blueprint $table) {
             $table->id();
-            $table->integer('initiatives_id');
+            $table->foreignId('initiatives_id')->index();
             $table->string('division');
             $table->string('pic');
             $table->string('start_date');
