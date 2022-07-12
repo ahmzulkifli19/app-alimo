@@ -1,10 +1,3 @@
-@if(Auth::user()->role==1)
-@else`
-<script>
-    alert("You can't access this page.")
-    window.location.href = "{{ url('/') }}";
-</script>
-@endif
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +10,7 @@
 	<meta name="format-detection" content="telephone=no">
 
 	<!-- PAGE TITLE HERE -->
-	<title>Edit Project Planning | PM Alimo C&T </title>
+	<title>Edit Project Execution | PM Alimo C&T </title>
 
     <!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="../../images/logo_alimo.png">
@@ -60,7 +53,7 @@
                 <div class="container-fluid">
                     <div class="row page-titles">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active"><a href="../../javascript:void(0)">Project Planning</a></li>
+                            <li class="breadcrumb-item active"><a href="../../javascript:void(0)">Project Execution</a></li>
                             <li class="breadcrumb-item"><a href="../../javascript:void(0)">Edit</a></li>
                         </ol>
                     </div>
@@ -69,7 +62,7 @@
                         <div class="col-xl-12 col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Edit Project Planning</h4>
+                                    <h4 class="card-title">Edit Project Execution</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="basic-form">
@@ -85,7 +78,7 @@
                                                 {{ session('error') }}
                                             </div>
                                         @endif
-                                        <form action="{{ route('planning.update', $planning->id) }}" method="POST">
+                                        <form action="{{ route('execution.update', $execution->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="row">
@@ -106,21 +99,15 @@
                                                 </div>
 
                                                 <div class="mb-3 col-md-6">
-                                                    <label class="col-form-group" for="division">Division <span class="text-danger"> Edit here! *</span></label>
-                                                    <select class="select form-control @error('division') is-invalid @enderror"
-                                                    id="d_division" name="division" value="{{ old('division', $planning->division) }}" required>
+                                                    <label for="planning_id">PIC <span class="text-danger">*</span></label>
+                                                    <select class="select form-control @error('planning_id') is-invalid @enderror"
+                                                    id="d_planning_id" name="planning_id" value="{{ old('planning_id') }}" disabled>
                                                         <option selected disabled>-- Selected --</option>
-                                                        <option value="Web Developer">Web Developer</option>
-                                                        <option value="UI/UX Developer">UI/UX Developer</option>
-                                                        <option value="IT Support">IT Support</option>
-                                                        <option value="Project Manager Officer">Project Manager Officer</option>
-                                                        <option value="Branding and Communication">Branding and Communication</option>
-                                                        <option value="Graphic Designer">Graphic Designer</option>
-                                                        <option value="Video Designer">Video Designer</option>
-                                                        <option value="Bussiness Analythic">Bussiness Analythic</option>
-                                                        </select>
-                                                    <!-- error message untuk title -->
-                                                    @error('division')
+                                                        @foreach ($planning as $plan)
+                                                            <option value="{{ $plan->pic }}">{{ $plan->pic }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('planning_id')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
                                                         </div>
@@ -128,35 +115,29 @@
                                                 </div>
 
                                                 <div class="mb-3 col-md-6">
-                                                    <label for="pic">PIC <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control @error('pic') is-invalid @enderror"
-                                                        name="pic" value="{{ old('pic', $planning->pic) }}" placeholder="PIC Project"required>
+                                                    <label class="col-form-group" for="status">Status <span class="text-danger"> Edit here! *</span></label>
+                                                    <select class="select form-control @error('status') is-invalid @enderror"
+                                                    id="d_status" name="status" value="{{ old('status') }}" required>
+                                                        <option selected disabled>-- Selected --</option>
+                                                        <option value="Pending">Pending</option>
+                                                        <option value="On Progress">On Progress</option>
+                                                        <option value="Successfull">Successfull</option>
+                                                        <option value="Canceled">Canceled</option>
+                                                    </select>
                                                     <!-- error message untuk title -->
-                                                    @error('pic')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                    @error('status')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
                                                 <div class="mb-3 col-md-6">
-                                                    <label for="start_date">Start Date <span class="text-danger">*</span></label>
-                                                    <input type="text" class="datepicker-default form-control @error('start_date') is-invalid @enderror"
-                                                        name="start_date" value="{{ old('start_date', $planning->start_date) }}" placeholder="Start Date Project"required>
+                                                    <label for="progress">Progress <span class="text-danger">Edit here! *</span></label>
+                                                    <input type="number" class="form-control @error('progress') is-invalid @enderror"
+                                                        name="progress" value="{{ old('progress', $execution->progress) }}" placeholder="Progress Project" required>
                                                     <!-- error message untuk title -->
-                                                    @error('start_date')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="mb-3 col-md-6">
-                                                    <label for="due_date">Due Date <span class="text-danger">*</span></label>
-                                                    <input type="text" class="datepicker-default form-control @error('due_date') is-invalid @enderror"
-                                                        name="due_date" value="{{ old('due_date', $planning->due_date) }}" placeholder="Due Date Project"required>
-                                                    <!-- error message untuk title -->
-                                                    @error('due_date')
+                                                    @error('progress')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -166,11 +147,8 @@
                                             </div>
                                             <div class="float-right">
                                                 <button type="submit" class="btn btn-primary">Update</button>
-                                                <a href="{{ route('planning.index') }}" class="btn btn-secondary">Back</a>
+                                                <a href="{{ route('execution.index') }}" class="btn btn-secondary">Back</a>
                                             </div>
-                                            {{-- <button type="submit" class="btn btn-primary">Update</button>
-                                            <a href="{{ route('planning.index') }}" class="btn btn-secondary">Back</a> --}}
-                                            {{-- <button type="submit" class="btn btn-md btn-primary">Update</button> --}}
                                         </form>
                                     </div>
                                 </div>
@@ -268,14 +246,17 @@
 
     {{-- details view --}}
     <script>
-
-        var initiatives_id = '{{ old('initiatives_id', $planning->initiatives->project_code) }}';
+        var initiatives_id = '{{ old('initiatives_id', $execution->initiatives->project_code) }}';
         var _option = '<option selected value="' +initiatives_id+ '">' + initiatives_id + '</option>'
         $( _option).appendTo("#d_initiatives_id");
 
-        var division = '{{ old('division', $planning->division) }}';
-        var _option = '<option selected value="' +division+ '">' + division + '</option>'
-        $( _option).appendTo("#d_division");
+        var planning_id = '{{ old('planning_id', $execution->planning->pic) }}';
+        var _option = '<option selected value="' +planning_id+ '">' + planning_id + '</option>'
+        $( _option).appendTo("#d_planning_id");
+
+        var status = '{{ old('status', $execution->status) }}';
+        var _option = '<option selected value="' +status+ '">' + status + '</option>'
+        $( _option).appendTo("#d_status");
     </script>
 
 </body>

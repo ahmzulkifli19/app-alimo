@@ -15,8 +15,8 @@ class CreateExecutionsTable extends Migration
     {
         Schema::create('execution', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('initiatives_id')->index();
-            $table->foreignId('planning_id')->index();
+            $table->foreignId('initiatives_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('planning_id')->unique();
             $table->string('status');
             $table->string('progress');
             $table->timestamps();

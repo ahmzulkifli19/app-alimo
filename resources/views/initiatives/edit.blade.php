@@ -44,7 +44,6 @@
                     <div class="row page-titles">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active"><a href="../../javascript:void(0)">Project Initiatives</a></li>
-                            {{-- <li class="breadcrumb-item"><a href="../../javascript:void(0)">Edit Project Assignment</a></li> --}}
                         </ol>
                     </div>
                     <!-- row -->
@@ -153,23 +152,6 @@
                                                     @enderror
                                                 </div>
                                                 <div class="mb-3 col-md-6">
-                                                    <label class="col-form-group" for="status">Status <span class="text-danger"> Edit here! *</span></label>
-                                                    <select class="select form-control @error('status') is-invalid @enderror"
-                                                    id="d_status" name="status" value="{{ old('status') }}" required>
-                                                        <option selected disabled>-- Selected --</option>
-                                                        <option value="Pending">Pending</option>
-                                                        <option value="On Progress">On Progress</option>
-                                                        <option value="Successful">Successful</option>
-                                                        <option value="Canceled">Canceled</option>
-                                                    </select>
-                                                    <!-- error message untuk title -->
-                                                    @error('status')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                                <div class="mb-3 col-md-6">
                                                     <label for="client">Client <span class="text-danger"> Edit here! *</span></label>
                                                     <input type="text" class="form-control @error('client') is-invalid @enderror"
                                                         name="client" value="{{ old('client', $initiatives->client) }}" required>
@@ -191,10 +173,10 @@
                                                         </div>
                                                     @enderror
                                                 </div>
-                                                <div class="mb-3 col-md-12">
+                                                <div class="mb-3 col-md-6">
                                                     <label for="description">Description <span class="text-danger"> Edit here! *</span></label>
-                                                    <input type="text" class="form-control @error('description') is-invalid @enderror"
-                                                        name="description" value="{{ old('description', $initiatives->description) }}" required>
+                                                    <textarea class="form-control" id="validationCustom04" rows="5" placeholder="Description Project" @error('description') is-invalid @enderror"
+                                                    name="description" required="">{{ old('description', $initiatives->description) }}</textarea>
                                                     <!-- error message untuk title -->
                                                     @error('description')
                                                         <div class="invalid-feedback">
@@ -207,9 +189,6 @@
                                                 <button type="submit" class="btn btn-primary">Update</button>
                                                 <a href="{{ route('initiatives.index') }}" class="btn btn-secondary">Back</a>
                                             </div>
-                                            {{-- <button type="submit" class="btn btn-primary">Update</button>
-                                            <a href="{{ route('assignment.index') }}" class="btn btn-secondary">Back</a> --}}
-                                            {{-- <button type="submit" class="btn btn-md btn-primary">Update</button> --}}
                                         </form>
                                     </div>
                                 </div>
@@ -312,14 +291,6 @@
         var priority = '{{ old('priority', $initiatives->priority) }}';
         var _option = '<option selected value="' +priority+ '">' + priority + '</option>'
         $( _option).appendTo("#d_priority");
-
-        var status = '{{ old('status', $initiatives->status) }}';
-        var _option = '<option selected value="' +status+ '">' + status + '</option>'
-        $( _option).appendTo("#d_status");
-
-        var assignment = '{{ old('assignment', $initiatives->assignment) }}';
-        var _option = '<option selected value="' +assignment+ '">' + assignment + '</option>'
-        $( _option).appendTo("#d_assignment");
     </script>
 
 </body>

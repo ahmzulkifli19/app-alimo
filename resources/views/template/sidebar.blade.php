@@ -21,7 +21,7 @@
                             <li><a href="{{ url('/assignment') }}">Project Assignment</a></li>
                             <li><a href="{{ url('/planning') }}">Project Planning</a></li>
                         @endif
-                        <li><a href="{{ url('/project-execution') }}">Project Execution</a></li>
+                        <li><a href="{{ url('/execution') }}">Project Execution</a></li>
                     </ul>
                 </li>
 

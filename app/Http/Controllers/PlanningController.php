@@ -14,10 +14,10 @@ class PlanningController extends Controller
 {
     public function index()
     {
-        $planning = Planning::with('initiatives')->paginate(10);
-        $initiatives = Initiatives::latest()->get();
+        $planning = Planning::latest()->get();
+        $initiatives = Planning::with('initiatives')->paginate(10);
         $initiativess = Initiatives::all();
-        return view('planning.index', compact('planning','initiatives', 'initiativess'));
+        return view('planning.index', compact('planning', 'initiatives', 'initiativess'));
     }
 
     public function store(Request $request)
@@ -28,7 +28,7 @@ class PlanningController extends Controller
             'pic' => 'required',
             'start_date' => 'required',
             'due_date' => 'required',
-            'progress' => 'required',
+            // 'progress' => 'required',
         ]);
 
         $planning = Planning::create([
@@ -37,7 +37,7 @@ class PlanningController extends Controller
             'pic' => $request->pic,
             'start_date' => $request->start_date,
             'due_date' => $request->due_date,
-            'progress' => $request->progress,
+            // 'progress' => $request->progress,
         ]);
 
         if ($planning) {
@@ -71,7 +71,7 @@ class PlanningController extends Controller
             'pic' => 'required',
             'start_date' => 'required',
             'due_date' => 'required',
-            'progress' => 'required',
+            // 'progress' => 'required',
         ]);
 
         $planning = Planning::findOrFail($id);
@@ -82,7 +82,7 @@ class PlanningController extends Controller
             'pic' => $request->pic,
             'start_date' => $request->start_date,
             'due_date' => $request->due_date,
-            'progress' => $request->progress,
+            // 'progress' => $request->progress,
         ]);
 
         if ($planning) {

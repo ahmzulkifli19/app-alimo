@@ -160,23 +160,6 @@
                                                     @enderror
                                                 </div>
                                                 <div class="mb-3 col-md-6">
-                                                    <label class="col-form-group" for="status">Status <span class="text-danger"> Edit here! *</span></label>
-                                                    <select class="select form-control @error('status') is-invalid @enderror"
-                                                    id="d_status" name="status" value="{{ old('status') }}" required>
-                                                        <option selected disabled>-- Selected --</option>
-                                                        <option value="Pending">Pending</option>
-                                                        <option value="On Progress">On Progress</option>
-                                                        <option value="Successful">Successful</option>
-                                                        <option value="Canceled">Canceled</option>
-                                                    </select>
-                                                    <!-- error message untuk title -->
-                                                    @error('status')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                                <div class="mb-3 col-md-6">
                                                     <label for="client">Client <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control @error('client') is-invalid @enderror"
                                                         name="client" value="{{ old('client', $assignment->client) }}" disabled>
@@ -334,10 +317,6 @@
         var priority = '{{ old('priority', $assignment->priority) }}';
         var _option = '<option selected value="' +priority+ '">' + priority + '</option>'
         $( _option).appendTo("#d_priority");
-
-        var status = '{{ old('status', $assignment->status) }}';
-        var _option = '<option selected value="' +status+ '">' + status + '</option>'
-        $( _option).appendTo("#d_status");
 
         var assignment = '{{ old('assignment', $assignment->assignment) }}';
         var _option = '<option selected value="' +assignment+ '">' + assignment + '</option>'

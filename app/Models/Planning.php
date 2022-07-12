@@ -25,4 +25,9 @@ class Planning extends Model
     {
         return $this->belongsTo(Initiatives::class);
     }
+
+    public function execution()
+    {
+        return $this->hasMany(Execution::class);
+    }
 }

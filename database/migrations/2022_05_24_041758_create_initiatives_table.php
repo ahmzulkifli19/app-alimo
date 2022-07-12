@@ -20,11 +20,9 @@ class CreateInitiativesTable extends Migration
             $table->string('project_category');
             $table->integer('year');
             $table->string('priority');
-            $table->string('status');
             $table->string('client');
             $table->string('email');
             $table->text('description');
-            $table->string('assignment')->nullable();
             $table->timestamps();
         });
     }

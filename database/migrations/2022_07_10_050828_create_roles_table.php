@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlanningsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreatePlanningsTable extends Migration
      */
     public function up()
     {
-        Schema::create('planning', function (Blueprint $table) {
+        Schema::create('role', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('initiatives_id')->constrained()->cascadeOnDelete();
-            $table->string('division');
-            $table->string('pic');
-            $table->date('start_date');
-            $table->date('due_date');
+            $table->string('role_name');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreatePlanningsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('planning');
+        Schema::dropIfExists('role');
     }
 }

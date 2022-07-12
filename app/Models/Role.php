@@ -5,20 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Assignment extends Model
+class Role extends Model
 {
     use HasFactory;
-
-    protected $table = 'initiatives';
+    protected $table = 'role';
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
-        'initiatives_id',
-        'assignment',
+        'role_name',
     ];
 
-    public function initiatives()
+    public function users()
     {
-        return $this->belongsTo(Initiatives::class);
+        return $this->hasMany(Users::class);
     }
 }

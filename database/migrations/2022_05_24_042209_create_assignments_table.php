@@ -15,7 +15,7 @@ class CreateAssignmentsTable extends Migration
     {
         Schema::create('assignment', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('initiatives_id')->index();
+            $table->foreignId('initiatives_id')->constrained()->cascadeOnDelete();
             $table->string('assignment');
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class Execution extends Model
     protected $fillable = [
         'id',
         'initiatives_id',
-        'initiatives_planning',
+        'planning_id',
         'status',
         'progress',
     ];

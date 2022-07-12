@@ -47,11 +47,9 @@ class InitiativesController extends Controller
             'project_category' => 'required',
             'year' => 'required',
             'priority' => 'required',
-            'status' => 'required',
             'client' => 'required',
             'email' => 'required',
             'description' => 'required',
-            'assignment' => 'required',
         ]);
 
         $initiatives = Initiatives::create([
@@ -60,11 +58,9 @@ class InitiativesController extends Controller
             'project_category' => $request->project_category,
             'year' => $request->year,
             'priority' => $request->priority,
-            'status' => $request->status,
             'client' => $request->client,
             'email' => $request->email,
             'description' => $request->description,
-            'assignment' => $request->assignment,
         ]);
 
         if ($initiatives) {
@@ -121,11 +117,9 @@ class InitiativesController extends Controller
             'project_category' => 'required',
             'year' => 'required',
             'priority' => 'required',
-            'status' => 'required',
             'client' => 'required',
             'email' => 'required',
             'description' => 'required',
-            // 'assignment' => 'required',
         ]);
 
         $initiatives = Initiatives::findOrFail($id);
@@ -136,11 +130,9 @@ class InitiativesController extends Controller
             'project_category' => $request->project_category,
             'year' => $request->year,
             'priority' => $request->priority,
-            'status' => $request->status,
             'client' => $request->client,
             'email' => $request->email,
             'description' => $request->description,
-            // 'assignment' => $request->assignment,
         ]);
 
         if ($initiatives) {

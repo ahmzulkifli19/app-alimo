@@ -84,7 +84,8 @@
                                                 <th style="width: 100px;">Project Code</th>
                                                 <th style="min-width: 200px;">Name Project</th>
                                                 <th style="min-width: 150px;">Project Category</th>
-                                                <th style="min-width: 80px;">Status</th>
+                                                {{-- <th style="min-width: 80px;">Status</th> --}}
+                                                <th style="min-width: 70px;">Year</th>
                                                 <th style="min-width: 70px;">Priority</th>
                                                 <th style="min-width: 70px;">Assignment</th>
                                             </tr>
@@ -93,10 +94,13 @@
                                             @foreach ($initiatives as $key=>$i )
                                                 <tr>
                                                     <td>{{ ++$key }}</td>
+                                                    {{-- <td hidden class="e_id">{{ $i->id }}</td>
+                                                    <td hidden class="id">{{ $i->id }}</td> --}}
                                                     <td class="project_code">{{ $i->project_code }}</td>
                                                     <td class="name_project">{{ $i->name_project }}</td>
                                                     <td class="project_category">{{ $i->project_category }}</td>
-                                                    <td>
+                                                    <td class="year">{{ $i->year }}</td>
+                                                    {{-- <td>
                                                         @if ($i->status == 'Pending')
                                                             <span>
                                                                 <i class="fa fa-circle text-warning me-1"></i>
@@ -118,7 +122,7 @@
                                                                 {{ $i->status }}
                                                             </span>
                                                         @endif
-                                                    </td>
+                                                    </td> --}}
                                                     <td class="priority">{{ $i->priority }}</td>
                                                     <td>
                                                         @if ($i->assignment == 'Accept')
@@ -142,6 +146,7 @@
                         </div>
                     </div>
 
+                    {{-- Table Project Initiatives --}}
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
@@ -227,7 +232,7 @@
                                                                 action="{{ route('planning.destroy', $plan->id) }}" method="POST">
                                                                 <a href="{{ route('planning.edit', $plan->id) }}"
                                                                     class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                                <button type="button" class="btn btn-warning shadow btn-xs sharp me-1 details-planning" data-bs-toggle="modal" data-bs-target="#details-initiatives">
+                                                                <button type="button" class="btn btn-warning shadow btn-xs sharp me-1 details-planning" data-bs-toggle="modal" data-bs-target="#details-planning">
                                                                     <i class="fas fa-eye"></i>
                                                                 </button>
                                                                 @csrf
@@ -331,18 +336,6 @@
                                                 @enderror
                                             </div>
 
-                                            <div class="form-group mt-3">
-                                                <label for="progress">Progress <span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control @error('progress') is-invalid @enderror"
-                                                    name="progress" value="{{ old('progress') }}" placeholder="Progress Project"required>
-                                                <!-- error message untuk title -->
-                                                @error('progress')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                                @enderror
-                                            </div>
-
                                             <div class="modal-footer">
                                                 <div class="float-right">
                                                     <button type="submit" class="btn btn-md btn-success">Submit</button>
@@ -354,6 +347,103 @@
                                 </div>
                             </div>
                         </div>
+
+                        {{-- Details Data --}}
+                        <div id="details-planning" class="modal custonm-modal fade" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">DETAILS PROJECT PLANNING</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{-- FORM --}}
+                                        <form id="d_form" action="{{ route('planning.store') }}" method="POST">
+                                            @csrf
+                                            <div class="form-group mt-3">
+                                                <label for="initiatives_id">Project Code <span class="text-danger">*</span></label>
+                                                    <select class="select form-control @error('initiatives_id') is-invalid @enderror"
+                                                    id="d_initiatives_id" name="initiatives_id" value="{{ old('$planning->initiatives_id') }}" required>
+                                                        <option selected disabled>-- Selected --</option>
+                                                        @foreach ($initiatives as $i)
+                                                            <option value="{{ $i->project_code }}">{{ $i->project_code }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('initiatives_id')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                            </div>
+
+                                            <div class="form-group mt-3">
+                                                <label class="col-form-group" for="division">Division <span class="text-danger">*</span></label>
+                                                <select class="select form-control @error('division') is-invalid @enderror"
+                                                id="d_division" name="division" value="{{ old('division') }}" required>
+                                                    <option selected disabled>-- Selected --</option>
+                                                    <option value="Web Developer">Web Developer</option>
+                                                    <option value="UI/UX Developer">UI/UX Developer</option>
+                                                    <option value="IT Support">IT Support</option>
+                                                    <option value="Project Manager Officer">Project Manager Officer</option>
+                                                    <option value="Branding and Communication">Branding and Communication</option>
+                                                    <option value="Graphic Designer">Graphic Designer</option>
+                                                    <option value="Video Designer">Video Designer</option>
+                                                    <option value="Bussiness Analythic">Bussiness Analythic</option>
+                                                </select>
+                                                <!-- error message untuk title -->
+                                                @error('division')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group mt-3">
+                                                <label for="pic">PIC <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control @error('pic') is-invalid @enderror"
+                                                id="d_pic" name="pic" value="{{ old('pic') }}" placeholder="PIC Project"required>
+                                                <!-- error message untuk title -->
+                                                @error('pic')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group mt-3">
+                                                <label for="start_date">Start Date <span class="text-danger">*</span></label>
+                                                <input type="text" class="datepicker-default form-control @error('start_date') is-invalid @enderror"
+                                                id="d_start_date" name="start_date" value="{{ old('start_date') }}" placeholder="Start Date Project"required>
+                                                <!-- error message untuk title -->
+                                                @error('start_date')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group mt-3">
+                                                <label for="due_date">Due Date <span class="text-danger">*</span></label>
+                                                <input type="text" class="datepicker-default form-control @error('due_date') is-invalid @enderror"
+                                                id="d_due_date" name="due_date" value="{{ old('due_date') }}" placeholder="Due Date Project"required>
+                                                <!-- error message untuk title -->
+                                                @error('due_date')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <div class="float-right">
+                                                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div
 
                     </div>
 
@@ -444,6 +534,30 @@
                 setTimeout(function(){
                     cardsCenter();
                 }, 1000);
+            });
+        </script>
+
+        {{-- details view --}}
+        <script>
+            $(document).on('click','.details-planning',function()
+            {
+                // alert('test');
+                var _this = $(this).parents('tr');
+                $('#d_id').val(_this.find('.d_id').text());
+                var d_form = (_this.find(".d_id").text());
+                $('#d_form').attr('action', 'planning/'+d_form);
+                $('#d_pic').val(_this.find('.pic').text());
+                $('#d_start_date').val(_this.find('.start_date').text());
+                $('#d_due_date').val(_this.find('.due_date').text());
+
+                var initiatives_id = '{{ old('initiatives_id', $planning->initiatives->project_code) }}';
+                var _option = '<option selected value="' +initiatives_id+ '">' + initiatives_id + '</option>'
+                $( _option).appendTo("#d_initiatives_id");
+
+                var division = '{{ old('division', $planning->division) }}';
+                var _option = '<option selected value="' +division+ '">' + division + '</option>'
+                $( _option).appendTo("#d_division");
+
             });
         </script>
     {{------- End Scripts ------}}

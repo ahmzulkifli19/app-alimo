@@ -18,11 +18,9 @@ class Initiatives extends Model
         'project_category',
         'year',
         'priority',
-        'status',
         'client',
         'email',
         'description',
-        'assignment',
     ];
 
     public function assignment()
@@ -33,5 +31,15 @@ class Initiatives extends Model
     public function planning()
     {
         return $this->hasMany(Planning::class);
+    }
+
+    public function initiatives()
+    {
+        return $this->hasMany(Planning::class);
+    }
+
+    public function execution()
+    {
+        return $this->hasMany(Execution::class);
     }
 }

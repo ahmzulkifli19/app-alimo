@@ -61,87 +61,12 @@
                     </div>
                     <!-- row -->
 
-                    {{-- Table Project Initiatives --}}
-                    {{-- <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">List Project Assignment</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display">
-                                        <thead>
-                                            <tr>
-                                                <th style="min-width: 10px;;"></th>
-                                                <th style="width: 100px;">Project Code</th>
-                                                <th style="min-width: 200px;">Name Project</th>
-                                                <th style="min-width: 150px;">Project Category</th>
-                                                <th style="min-width: 80px;">Status</th>
-                                                <th style="min-width: 70px;">Priority</th>
-                                                <th style="min-width: 70px;">Assignment</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($initiatives as $key=>$i )
-                                                <tr>
-                                                    <td>{{ ++$key }}</td>
-                                                    <td class="project_code">{{ $i->project_code }}</td>
-                                                    <td class="name_project">{{ $i->name_project }}</td>
-                                                    <td class="project_category">{{ $i->project_category }}</td>
-                                                    <td>
-                                                        @if ($i->status == 'Pending')
-                                                            <span>
-                                                                <i class="fa fa-circle text-warning me-1"></i>
-                                                                {{ $i->status }}
-                                                            </span>
-                                                        @elseif ($i->status == 'On Progress')
-                                                            <span>
-                                                                <i class="fa fa-circle text-primary me-1"></i>
-                                                                {{ $i->status }}
-                                                            </span>
-                                                        @elseif ($i->status == 'Successfull')
-                                                            <span>
-                                                                <i class="fa fa-circle text-success me-1"></i>
-                                                                {{ $i->status }}
-                                                            </span>
-                                                        @elseif ($i->status == 'Canceled')
-                                                            <span>
-                                                                <i class="fa fa-circle text-danger me-1"></i>
-                                                                {{ $i->status }}
-                                                            </span>
-                                                        @endif
-                                                    </td>
-                                                    <td class="priority">{{ $i->priority }}</td>
-                                                    <td>
-                                                        @if ($i->assignment == 'Accept')
-                                                            <span class="badge badge-pill badge-success">
-                                                                <i class="fa fa-check me-1"></i>
-                                                                {{ $i->assignment }}
-                                                            </span>
-                                                        @elseif ($i->assignment == 'Dissmiss')
-                                                            <span class="badge badge-pill badge-danger">
-                                                                <i class="fa fa-ban me-1"></i>
-                                                                {{ $i->assignment }}
-                                                            </span>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-
+                    {{-- List Project Planning --}}
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Datatable Project Execution</h4>
-                                    <button type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#tambah-execution">
-                                        + Add Project Execution
-                                    </button>
+                                    <h4 class="card-title">List Project Planning</h4>
                                 </div>
 
                                 {{-- Table Project Execution --}}
@@ -150,84 +75,27 @@
                                         <table id="example4" class="display">
                                             <thead>
                                                 <tr>
-                                                    <th style="min-width: 10px;;">#</th>
-                                                    <th style="min-width: 85px">Project Code</th>
+                                                    <th style="min-width: 10px;">#</th>
+                                                    <th style="min-width: 85px;">Project Code</th>
                                                     <th style="min-width: 150px;">Name Project</th>
-                                                    {{-- <th style="min-width: 150px;">Project Category</th> --}}
-                                                    {{-- <th style="min-width: 50px;">Year</th> --}}
-                                                    {{-- <th style="min-width: 200px;">Client</th> --}}
-                                                    {{-- <th style="min-width: 150px;">Division</th> --}}
-                                                    {{-- <th style="min-width: 100px;">PIC</th> --}}
-                                                    {{-- <th style="min-width: 70px;">Status</th> --}}
-                                                    {{-- <th style="min-width: 80px;">Progress</th> --}}
+                                                    <th style="min-width: 100px;">Divisi</th>
+                                                    <th style="min-width: 100px;">PIC</th>
                                                     <th style="min-width: 85px;">Start Date</th>
                                                     <th style="min-width: 85px;">Due Date</th>
-                                                    {{-- <th style="width: 500px;">Assignment</th> --}}
-                                                    <th style="min-width: 70px;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($planning as $key=> $plan )
+                                                @foreach ($planning as $key => $plan )
                                                     <tr>
                                                         <td>{{ ++$key }}</td>
                                                         <td class="initiatives_id">{{ $plan->initiatives->project_code }}</td>
                                                         <td class="initiatives_id">{{ $plan->initiatives->name_project }}</td>
-                                                        {{-- <td class="initiatives_id">{{ $plan->initiatives->project_category }}</td> --}}
-                                                        {{-- <td class="initiatives_id">{{ $plan->initiatives->year }}</td> --}}
-                                                        {{-- <td class="initiatives_id">{{ $plan->initiatives->client }}</td> --}}
-                                                        {{-- <td class="division">{{ $plan->division }}</td> --}}
+                                                        <td class="division">{{ $plan->division }}</td>
                                                         <td class="pic">{{ $plan->pic }}</td>
-                                                        {{-- <td>
-                                                            @if ($plan->initiatives->status == 'Pending')
-                                                                <span class="badge badge-pill badge-warning">
-                                                                    <i class="fa fa-stream me-1"></i>
-                                                                    {{ $plan->initiatives->status }}
-                                                                </span>
-                                                            @elseif ($plan->initiatives->status == 'On Progress')
-                                                                <span class="badge badge-pill badge-primary">
-                                                                    <i class="fa fa-redo me-1"></i>
-                                                                    {{ $plan->initiatives->status }}
-                                                                </span>
-                                                            @elseif ($plan->initiatives->status == 'Successfull')
-                                                                <span class="badge badge-pill badge-success">
-                                                                    <i class="fa fa-check me-1"></i>
-                                                                    {{ $plan->initiatives->status }}
-                                                                </span>
-                                                            @elseif ($plan->initiatives->status == 'Cancel')
-                                                                <span class="badge badge-pill badge-danger">
-                                                                    <i class="fa fa-ban me-1"></i>
-                                                                    {{ $plan->initiatives->status }}
-                                                                </span>
-                                                            @endif
-                                                        </td> --}}
-                                                        {{-- <td>
-                                                            <h6>
-                                                                <span class="pull-end">{{ $plan->progress }}%</span>
-                                                            </h6>
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-info progress-animated" style="width: {{ $plan->progress }}%;" role="progressbar">
-                                                                    <span class="sr-only">{{ $plan->progress }}% Complete</span>
-                                                                </div>
-                                                            </div>
-                                                        </td> --}}
                                                         <td class="star_date">{{ $plan->start_date }}</td>
                                                         <td class="due_date">{{ $plan->due_date }}</td>
-                                                        {{-- <td class="progress">{{ $plan->progress }}</td> --}}
-                                                        <td>
-                                                            <form onsubmit="return confirm('Are you sure ?');"
-                                                                action="{{ route('planning.destroy', $plan->id) }}" method="POST">
-                                                                <a href="{{ route('planning.edit', $plan->id) }}"
-                                                                    class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                                <button type="button" class="btn btn-warning shadow btn-xs sharp me-1 details-planning" data-bs-toggle="modal" data-bs-target="#details-initiatives">
-                                                                    <i class="fas fa-eye"></i>
-                                                                </button>
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button>
-                                                            </form>
-                                                        </td>
                                                     </tr>
-                                                    @endforeach
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -236,7 +104,7 @@
                         </div>
 
                         {{-- Tambah data --}}
-                        <div id="tambah-execution" class="modal custonm-modal fade" role="dialog">
+                        <div id="tambah-planning" class="modal custonm-modal fade" role="dialog">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -322,18 +190,6 @@
                                                 @enderror
                                             </div>
 
-                                            <div class="form-group mt-3">
-                                                <label for="progress">Progress <span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control @error('progress') is-invalid @enderror"
-                                                    name="progress" value="{{ old('progress') }}" placeholder="Progress Project"required>
-                                                <!-- error message untuk title -->
-                                                @error('progress')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                                @enderror
-                                            </div>
-
                                             <div class="modal-footer">
                                                 <div class="float-right">
                                                     <button type="submit" class="btn btn-md btn-success">Submit</button>
@@ -348,7 +204,183 @@
 
                     </div>
 
+                    {{-- Tabel Project Execution --}}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Datatable Project Execution</h4>
+                                    <button type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#tambah-execution">
+                                        + Add Project Execution
+                                    </button>
+                                </div>
 
+                                {{-- Table Project Execution --}}
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="example4" class="display">
+                                            <thead>
+                                                <tr>
+                                                    <th style="min-width: 10px;">#</th>
+                                                    <th style="min-width: 85px;">Project Code</th>
+                                                    <th style="min-width: 150px;">Name Project</th>
+                                                    <th style="min-width: 100px;">PIC</th>
+                                                    <th style="min-width: 85px;">Status</th>
+                                                    <th style="min-width: 85px;">Progress</th>
+                                                    <th style="min-width: 85px;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($execution as $key=> $exc )
+                                                    <tr>
+                                                        <td>{{ ++$key }}</td>
+                                                        <td class="initiatives_id">{{ $exc->initiatives->project_code }}</td>
+                                                        <td class="initiatives_id">{{ $exc->initiatives->name_project }}</td>
+                                                        <td class="planning_id">{{ $exc->planning->pic }}</td>
+                                                        <td>
+                                                            @if ($exc->status == 'Pending')
+                                                                <span>
+                                                                    <i class="fa fa-circle text-warning me-1"></i>
+                                                                    {{ $exc->status }}
+                                                                </span>
+                                                            @elseif ($exc->status == 'On Progress')
+                                                                <span>
+                                                                    <i class="fa fa-circle text-primary me-1"></i>
+                                                                    {{ $exc->status }}
+                                                                </span>
+                                                            @elseif ($exc->status == 'Successfull')
+                                                                <span>
+                                                                    <i class="fa fa-circle text-success me-1"></i>
+                                                                    {{ $exc->status }}
+                                                                </span>
+                                                            @elseif ($exc->status == 'Canceled')
+                                                                <span>
+                                                                    <i class="fa fa-circle text-danger me-1"></i>
+                                                                    {{ $exc->status }}
+                                                                </span>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <h6>
+                                                                <span class="pull-end">{{ $exc->progress }}%</span>
+                                                            </h6>
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-info progress-animated" style="width: {{ $exc->progress }}%;" role="progressbar">
+                                                                    <span class="sr-only">{{ $exc->progress }}% Complete</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <form onsubmit="return confirm('Are you sure ?');"
+                                                                action="{{ route('execution.destroy', $exc->id) }}" method="POST">
+                                                                <a href="{{ route('execution.edit', $exc->id) }}"
+                                                                    class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                                <button type="button" class="btn btn-warning shadow btn-xs sharp me-1 details-execution" data-bs-toggle="modal" data-bs-target="#details-execution">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </button>
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Tambah data --}}
+                        <div id="tambah-execution" class="modal custonm-modal fade" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">ADD PROJECT EXECUTION</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{-- FORM --}}
+                                        <form action="{{ route('execution.store') }}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label class="col-form-group" for="initiatives_id">Project Code <span class="text-danger">*</span></label>
+                                                <select class="select form-control @error('initiatives_id') is-invalid @enderror"
+                                                name="initiatives_id" value="{{ old('initiatives_id') }}" required>
+                                                    <option selected disabled>-- Selected --</option>
+                                                    @foreach ($initiatives as $i)
+                                                        <option value="{{ $i->id }}">{{ $i->project_code }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <!-- error message untuk title -->
+                                                @error('initiatives_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group mt-3">
+                                                <label class="col-form-group" for="planning_id">PIC <span class="text-danger">*</span></label>
+                                                <select class="select form-control @error('planning_id') is-invalid @enderror"
+                                                name="planning_id" value="{{ old('planning_id') }}" required>
+                                                    <option selected disabled>-- Selected --</option>
+                                                    @foreach ($planning as $plan)
+                                                        <option value="{{ $plan->id }}">{{ $plan->pic }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <!-- error message untuk title -->
+                                                @error('planning_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group mt-3">
+                                                <label class="col-form-group" for="status">Status <span class="text-danger">*</span></label>
+                                                <select class="select form-control @error('status') is-invalid @enderror"
+                                                id="e_status" name="status" value="{{ old('status') }}" required>
+                                                    <option selected disabled>-- Selected --</option>
+                                                    <option value="Pending">Pending</option>
+                                                    <option value="On Progress">On Progress</option>
+                                                    <option value="Successfull">Successfull</option>
+                                                    <option value="Canceled">Canceled</option>
+                                                </select>
+                                                <!-- error message untuk title -->
+                                                @error('status')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group mt-3">
+                                                <label class="col-form-group" for="progress">Progress <span class="text-danger">*</span></label>
+                                                <input type="number" class="form-control @error('progress') is-invalid @enderror"
+                                                    name="progress" value="{{ old('progress') }}" placeholder="Progress Project"required>
+                                                <!-- error message untuk title -->
+                                                @error('progress')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <div class="float-right">
+                                                    <button type="submit" class="btn btn-md btn-success">Save</button>
+                                                    {{-- <a href="{{ route('initiatives.index') }}" class="btn btn-md btn-secondary">Back</a> --}}
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             {{-- --- Content Body End --- --}}

@@ -57,6 +57,9 @@ Route::resource('planning', PlanningController::class);
 Route::resource('project-timeline', TimelineController::class);
 
 // ----------------------------------------- Projects Execution ----------------------------------------- //
+Route::resource('execution', ExecutionController::class);
+
+// ----------------------------------------- Projects Execution ----------------------------------------- //
 Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified' ])->group(function () {
     Route::get('/project-execution', function () { return view('projects/project-execution'); })->name('project-execution');
 });
