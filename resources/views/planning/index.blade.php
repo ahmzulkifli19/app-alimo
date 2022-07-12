@@ -80,7 +80,7 @@
                                     <table id="example3" class="display">
                                         <thead>
                                             <tr>
-                                                <th style="min-width: 10px;;"></th>
+                                                <th style="min-width: 10px;;">#</th>
                                                 <th style="width: 100px;">Project Code</th>
                                                 <th style="min-width: 200px;">Name Project</th>
                                                 <th style="min-width: 150px;">Project Category</th>
@@ -91,39 +91,39 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($initiatives as $key=>$i )
+                                            @foreach ($assignment as $key=>$i )
                                                 <tr>
                                                     <td>{{ ++$key }}</td>
-                                                    {{-- <td hidden class="e_id">{{ $i->id }}</td>
-                                                    <td hidden class="id">{{ $i->id }}</td> --}}
-                                                    <td class="project_code">{{ $i->project_code }}</td>
-                                                    <td class="name_project">{{ $i->name_project }}</td>
-                                                    <td class="project_category">{{ $i->project_category }}</td>
-                                                    <td class="year">{{ $i->year }}</td>
+                                                    {{-- <td hidden class="e_id">{{ $i->initiatives->id }}</td>
+                                                    <td hidden class="id">{{ $i->initiatives->id }}</td> --}}
+                                                    <td class="project_code">{{ $i->initiatives->project_code }}</td>
+                                                    <td class="name_project">{{ $i->initiatives->name_project }}</td>
+                                                    <td class="project_category">{{ $i->initiatives->project_category }}</td>
+                                                    <td class="year">{{ $i->initiatives->year }}</td>
                                                     {{-- <td>
-                                                        @if ($i->status == 'Pending')
+                                                        @if ($i->initiatives->status == 'Pending')
                                                             <span>
                                                                 <i class="fa fa-circle text-warning me-1"></i>
-                                                                {{ $i->status }}
+                                                                {{ $i->initiatives->status }}
                                                             </span>
-                                                        @elseif ($i->status == 'On Progress')
+                                                        @elseif ($i->initiatives->status == 'On Progress')
                                                             <span>
                                                                 <i class="fa fa-circle text-primary me-1"></i>
-                                                                {{ $i->status }}
+                                                                {{ $i->initiatives->status }}
                                                             </span>
-                                                        @elseif ($i->status == 'Successfull')
+                                                        @elseif ($i->initiatives->status == 'Successfull')
                                                             <span>
                                                                 <i class="fa fa-circle text-success me-1"></i>
-                                                                {{ $i->status }}
+                                                                {{ $i->initiatives->status }}
                                                             </span>
-                                                        @elseif ($i->status == 'Canceled')
+                                                        @elseif ($i->initiatives->status == 'Canceled')
                                                             <span>
                                                                 <i class="fa fa-circle text-danger me-1"></i>
-                                                                {{ $i->status }}
+                                                                {{ $i->initiatives->status }}
                                                             </span>
                                                         @endif
                                                     </td> --}}
-                                                    <td class="priority">{{ $i->priority }}</td>
+                                                    <td class="priority">{{ $i->initiatives->priority }}</td>
                                                     <td>
                                                         @if ($i->assignment == 'Accept')
                                                             <span class="badge badge-pill badge-success">
@@ -181,15 +181,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($planning as $key=> $plan )
+                                                @foreach ($initiatives as $key=> $plan )
                                                     <tr>
                                                         <td>{{ ++$key }}</td>
-                                                        <td class="initiatives_id">{{ $plan->initiatives->project_code }}</td>
-                                                        <td class="initiatives_id">{{ $plan->initiatives->name_project }}</td>
+                                                        <td class="project_code">{{ $plan->initiatives->project_code }}</td>
+                                                        <td class="name_project">{{ $plan->initiatives->name_project }}</td>
                                                         {{-- <td class="initiatives_id">{{ $plan->initiatives->project_category }}</td> --}}
                                                         {{-- <td class="initiatives_id">{{ $plan->initiatives->year }}</td> --}}
                                                         {{-- <td class="initiatives_id">{{ $plan->initiatives->client }}</td> --}}
-                                                        {{-- <td class="division">{{ $plan->division }}</td> --}}
+                                                        <td hidden class="division">{{ $plan->division }}</td>
                                                         <td class="pic">{{ $plan->pic }}</td>
                                                         {{-- <td>
                                                             @if ($plan->initiatives->status == 'Pending')
@@ -224,7 +224,7 @@
                                                                 </div>
                                                             </div>
                                                         </td> --}}
-                                                        <td class="star_date">{{ $plan->start_date }}</td>
+                                                        <td class="start_date">{{ $plan->start_date }}</td>
                                                         <td class="due_date">{{ $plan->due_date }}</td>
                                                         {{-- <td class="progress">{{ $plan->progress }}</td> --}}
                                                         <td>
@@ -266,7 +266,7 @@
                                                 <select class="select form-control @error('initiatives_id') is-invalid @enderror"
                                                 name="initiatives_id" value="{{ old('initiatives_id') }}" required>
                                                     <option selected disabled>-- Selected --</option>
-                                                    @foreach ($initiatives as $i)
+                                                    @foreach ($initiativess as $i)
                                                         <option value="{{ $i->id }}">{{ $i->project_code }}</option>
                                                     @endforeach
                                                 </select>
@@ -363,11 +363,8 @@
                                             <div class="form-group mt-3">
                                                 <label for="initiatives_id">Project Code <span class="text-danger">*</span></label>
                                                     <select class="select form-control @error('initiatives_id') is-invalid @enderror"
-                                                    id="d_initiatives_id" name="initiatives_id" value="{{ old('$planning->initiatives_id') }}" required>
+                                                    id="d_initiatives_id" name="initiatives_id" value="{{ old('$planning->initiatives_id') }}" disabled required>
                                                         <option selected disabled>-- Selected --</option>
-                                                        @foreach ($initiatives as $i)
-                                                            <option value="{{ $i->project_code }}">{{ $i->project_code }}</option>
-                                                        @endforeach
                                                     </select>
                                                     @error('initiatives_id')
                                                         <div class="invalid-feedback">
@@ -547,17 +544,24 @@
                 var d_form = (_this.find(".d_id").text());
                 $('#d_form').attr('action', 'planning/'+d_form);
                 $('#d_pic').val(_this.find('.pic').text());
-                $('#d_start_date').val(_this.find('.start_date').text());
                 $('#d_due_date').val(_this.find('.due_date').text());
+                $('#d_start_date').val(_this.find('.start_date').text());
 
-                var initiatives_id = '{{ old('initiatives_id', $planning->initiatives->project_code) }}';
-                var _option = '<option selected value="' +initiatives_id+ '">' + initiatives_id + '</option>'
+                var getproject = (_this.find(".project_code").text());
+                var _option = '<option selected value="' +getproject+ '">' + getproject + '</option>'
                 $( _option).appendTo("#d_initiatives_id");
-
-                var division = '{{ old('division', $planning->division) }}';
+               
+                var division = (_this.find(".division").text());
                 var _option = '<option selected value="' +division+ '">' + division + '</option>'
                 $( _option).appendTo("#d_division");
 
+                var options = document.getElementById("d_division").options;
+                for (var i = 0; i < options.length; i++) {
+                    if (options[i].text == (_this.find(".division").text())) {
+                        options[i].selected = true;
+                        break;
+                    }
+                }
             });
         </script>
     {{------- End Scripts ------}}

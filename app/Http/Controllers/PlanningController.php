@@ -7,6 +7,7 @@ use DB;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Str;
 use App\Models\Initiatives;
+use App\Models\Assignment;
 use App\Models\Planning;
 
 
@@ -14,10 +15,11 @@ class PlanningController extends Controller
 {
     public function index()
     {
-        $planning = Planning::latest()->get();
+        $assignment = Assignment::with('initiatives')->paginate(10);
         $initiatives = Planning::with('initiatives')->paginate(10);
+        $planning = Planning::latest()->get();
         $initiativess = Initiatives::all();
-        return view('planning.index', compact('planning', 'initiatives', 'initiativess'));
+        return view('planning.index', compact('assignment', 'planning', 'initiatives', 'initiativess'));
     }
 
     public function store(Request $request)

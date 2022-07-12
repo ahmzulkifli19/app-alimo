@@ -9,7 +9,7 @@ class Assignment extends Model
 {
     use HasFactory;
 
-    protected $table = 'initiatives';
+    protected $table = 'assignment';
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
@@ -20,5 +20,10 @@ class Assignment extends Model
     public function initiatives()
     {
         return $this->belongsTo(Initiatives::class);
+    }
+
+    public function assignment()
+    {
+        return $this->hasMany(Planning::class);
     }
 }

@@ -91,14 +91,14 @@
                                                         <td>{{ ++$key }}</td>
                                                         <td hidden class="e_id">{{ $i->id }}</td>
                                                         <td hidden class="id">{{ $i->id }}</td>
-                                                        <td class="project_code">{{ $i->project_code }}</td>
-                                                        <td class="name_project">{{ $i->name_project }}</td>
-                                                        <td class="project_category">{{ $i->project_category }}</td>
-                                                        <td hidden class="year">{{ $i->year }}</td>
-                                                        <td class="priority">{{ $i->priority }}</td>
-                                                        <td hidden class="client">{{ $i->client }}</td>
-                                                        <td hidden class="email">{{ $i->email }}</td>
-                                                        <td hidden class="description">{{ $i->description }}</td>
+                                                        <td class="project_code">{{ $i->initiatives->project_code }}</td>
+                                                        <td class="name_project">{{ $i->initiatives->name_project }}</td>
+                                                        <td class="project_category">{{ $i->initiatives->project_category }}</td>
+                                                        <td hidden class="year">{{ $i->initiatives->year }}</td>
+                                                        <td class="priority">{{ $i->initiatives->priority }}</td>
+                                                        <td hidden class="client">{{ $i->initiatives->client }}</td>
+                                                        <td hidden class="email">{{ $i->initiatives->email }}</td>
+                                                        <td hidden class="description">{{ $i->initiatives->description }}</td>
                                                         <td>
                                                             @if ($i->assignment == 'Accept')
                                                                 <span class="badge badge-pill badge-success">

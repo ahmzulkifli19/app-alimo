@@ -23,23 +23,18 @@ class Initiatives extends Model
         'description',
     ];
 
-    public function assignment()
-    {
-        return $this->hasMany(Assignment::class);
-    }
-
-    public function planning()
-    {
-        return $this->hasMany(Planning::class);
-    }
-
     public function initiatives()
     {
-        return $this->hasMany(Planning::class);
+        return $this->hasManyThrough(Assignment::class, Planning::class, Execution::class);
     }
 
-    public function execution()
-    {
-        return $this->hasMany(Execution::class);
-    }
+    // public function planning()
+    // {
+    //     return $this->hasMany(Planning::class);
+    // }
+
+    // public function execution()
+    // {
+    //     return $this->hasMany(Execution::class);
+    // }
 }

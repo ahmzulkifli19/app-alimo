@@ -466,7 +466,7 @@
         </script>
     {{------- End Scripts ------}}
 
-        {{-- update js --}}
+        {{-- update js 
         <script>
             $(document).on('click','.edit-initiatives',function()
             {
@@ -494,7 +494,7 @@
 
             });
         </script>
-
+        --}}
         {{-- details view --}}
         <script>
             $(document).on('click','.details-initiatives',function()

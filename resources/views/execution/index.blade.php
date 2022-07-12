@@ -210,9 +210,12 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Datatable Project Execution</h4>
+                                    @if(Auth::user()->role==0)
+                                    @else
                                     <button type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#tambah-execution">
                                         + Add Project Execution
                                     </button>
+                                    @endif
                                 </div>
 
                                 {{-- Table Project Execution --}}

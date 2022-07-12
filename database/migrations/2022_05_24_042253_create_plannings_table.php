@@ -15,11 +15,12 @@ class CreatePlanningsTable extends Migration
     {
         Schema::create('planning', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('initiatives_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('initiatives_id')->nullable();
             $table->string('division');
             $table->string('pic');
             $table->date('start_date');
             $table->date('due_date');
+            $table->foreign('initiatives_id')->references('id')->on('initiatives');
             $table->timestamps();
         });
     }

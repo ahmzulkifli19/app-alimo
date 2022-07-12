@@ -273,9 +273,13 @@
         var _option = '<option selected value="' +initiatives_id+ '">' + initiatives_id + '</option>'
         $( _option).appendTo("#d_initiatives_id");
 
-        var division = '{{ old('division', $planning->division) }}';
-        var _option = '<option selected value="' +division+ '">' + division + '</option>'
-        $( _option).appendTo("#d_division");
+        var options = document.getElementById("d_division").options;
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].text == "{{ old('division', $planning->division) }}") {
+                options[i].selected = true;
+                break;
+            }
+        }
     </script>
 
 </body>
