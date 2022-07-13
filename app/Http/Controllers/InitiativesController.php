@@ -7,6 +7,7 @@ use DB;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Str;
 use App\Models\Initiatives;
+use App\Models\Assignment;
 use Session;
 use Auth;
 
@@ -61,6 +62,14 @@ class InitiativesController extends Controller
             'client' => $request->client,
             'email' => $request->email,
             'description' => $request->description,
+        ]);
+
+        $setprojectcode = $request->project_code;
+        $getInitiatives = Initiatives::where('project_code', '=', $setprojectcode)->get()->first();
+
+        $assignment = Assignment::create([
+            'initiatives_id' => $getInitiatives['id'],
+            'assignment' => NULL,
         ]);
 
         if ($initiatives) {

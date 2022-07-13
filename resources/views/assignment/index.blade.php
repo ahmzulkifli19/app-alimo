@@ -110,6 +110,11 @@
                                                                     <i class="fa fa-ban me-1"></i>
                                                                     {{ $i->assignment }}
                                                                 </span>
+                                                            @else
+                                                                <span class="badge badge-pill badge-warning">
+                                                                    <i class="fa fa-ban me-1"></i>
+                                                                    None
+                                                                </span>
                                                             @endif
                                                         </td>
                                                         <td hidden class="assignment">{{ $i->assignment }}</td>
